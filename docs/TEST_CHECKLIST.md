@@ -1,0 +1,13 @@
+# Test checklist (tick on a real low-end Android)
+- [ ] Throttle to Slow 3G in DevTools: first load usable, result shown in 5 s or less
+- [ ] Hindi default when browser locale is hi; EN toggle works on every screen
+- [ ] Every screen has 3 primary buttons or fewer; tap targets 48 px or more; font 18 px or more
+- [ ] Meaning never by colour alone (icon + text + border style) – check in greyscale
+- [ ] TalkBack/screen reader reads labels; high-contrast and dark mode readable
+- [ ] Voice: Web Speech hi-IN works on target phone (else note fallback) [VERIFY]
+- [ ] Trust card opens WhatsApp share with generated text
+- [ ] Recovery screen shows 1930, cybercrime.gov.in, SCORES, populated summary
+- [ ] Situation ONGOING says do not pay a fee to withdraw
+- [ ] Privacy receipt matches DevTools Network tab (live mode: only /api/check)
+- [ ] Airplane mode: app loads from cache, rules-only/fixture mode works
+- [ ] No counters or "N people checked" anywhere; `node scripts/check.mjs` passes

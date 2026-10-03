@@ -1,0 +1,23 @@
+{
+ "header": "LOW_CONCERN",
+ "action_requested": {
+  "text_hi": "Koi paisa maangne wali baat nahi mili.",
+  "text_en": "No payment request found."
+ },
+ "items": [],
+ "stage": null,
+ "next_steps": [],
+ "payee": null,
+ "situation": "PREVENTION",
+ "privacy": {
+  "on_device": [
+   "redaction",
+   "extraction"
+  ],
+  "sent": [
+   "1 redacted text"
+  ],
+  "to": "LLM provider",
+  "stored": "none"
+ }
+}

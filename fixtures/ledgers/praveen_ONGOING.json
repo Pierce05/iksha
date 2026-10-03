@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "mode": "rules_only",
+  "header": "HIGH_CONCERN",
+  "action_requested": {
+    "text_en": "Send ₹9,876 to a personal-style UPI ID.",
+    "text_hi": "₹9,876 किसी के निजी UPI पर भेजें।",
+    "amount": 9876,
+    "deadline": false,
+    "secrecy": false
+  },
+  "items": [
+    {
+      "id": "p4_withdrawal_fee",
+      "card": "P4_WITHDRAWAL_FEE",
+      "label": "CONTRADICTED",
+      "forgeability": "hard",
+      "title_hi": "अपना ही पैसा निकालने के लिए फ़ीस या टैक्स माँगा गया है",
+      "title_en": "Asked to pay a fee or tax to take out your own money",
+      "why_hi": "असली प्लेटफ़ॉर्म आपका अपना पैसा निकालने के लिए नया पैसा जमा नहीं करवाते। यह उस चरण से मेल खाता है जो SEBI ने नकली ट्रेडिंग ऐप के लिए बताया है।",
+      "why_en": "Genuine platforms do not need a new deposit to release your own funds. This matches the withdrawal-blocked stage SEBI describes for fake trading apps.",
+      "source": {
+        "name": "SEBI: fake trading apps guidance",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Do not pay. Ask your bank and call 1930 if money has already moved.",
+      "settle_hi": "पैसे न भेजें। पैसे जा चुके हों तो बैंक को बताएँ और 1930 पर कॉल करें।"
+    },
+    {
+      "id": "p7_apk",
+      "card": "P7_APK",
+      "label": "CONTRADICTED",
+      "forgeability": "hard",
+      "title_hi": "ऐप APK फ़ाइल के रूप में या ऐप स्टोर के बाहर भेजा गया है",
+      "title_en": "App shared as an APK file or outside an app store",
+      "why_hi": "असली ब्रोकर ऐप आधिकारिक ऐप स्टोर या कंपनी के अपने जाँचे हुए पेज से आते हैं। चैट में आया APK लिंक इससे मेल नहीं खाता।",
+      "why_en": "Genuine broker apps come from official app stores or the firm's own verified page. An APK link from a chat does not match that.",
+      "source": {
+        "name": "SEBI: authorised trading apps list",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Check SEBI's list of authorised apps. Do not install from chat links.",
+      "settle_hi": "SEBI की अधिकृत ऐप सूची देखें। चैट के लिंक से कुछ इंस्टॉल न करें।"
+    },
+    {
+      "id": "p2_payee_unverified",
+      "card": "P2_BROKER_PAYMENT",
+      "label": "COULDNT_VERIFY",
+      "forgeability": "hard",
+      "title_hi": "जिसे पैसे भेजने को कहा गया है, उसकी जाँच नहीं हो सकी",
+      "title_en": "Payment destination could not be verified",
+      "why_hi": "यह पेमेंट ID उस वैलिडेटेड पैटर्न जैसी नहीं है जो SEBI ने रजिस्टर्ड ब्रोकर और फंड के लिए बताया है। यह एक अतिरिक्त जाँच है, नियम नहीं, इसलिए सिर्फ़ इससे कुछ साबित नहीं होता।",
+      "why_en": "This payment ID does not follow the validated-handle pattern SEBI describes for registered brokers and funds. Validated handles are an extra check, not a rule, so this alone proves nothing.",
+      "source": {
+        "name": "SEBI Check / validated UPI handles",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Search this ID on SEBI Check before paying. If it is not listed, do not pay.",
+      "settle_hi": "पैसे भेजने से पहले इस ID को SEBI Check पर खोजें। सूची में न मिले तो पैसे न भेजें।"
+    },
+    {
+      "id": "p6_url_flags",
+      "card": "P6_IDENTITY_VS_CHANNEL",
+      "label": "COULDNT_VERIFY",
+      "forgeability": "hard",
+      "title_hi": "एक लिंक सामान्य नहीं दिखता",
+      "title_en": "A link looks unusual",
+      "why_hi": "लिंक अपनी असली जगह छिपाता है, सुरक्षा वाला (https) नहीं है, या उसका पता किसी जाने-माने ब्रोकर के नाम जैसा है पर अलग पता है।",
+      "why_en": "The link hides its destination, is not secure (no https), or its web address resembles a known broker's name but is a different address.",
+      "source": {
+        "name": "SEBI: investor caution on links",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Do not open it from the chat. Type the firm's official address yourself.",
+      "settle_hi": "चैट से लिंक न खोलें। कंपनी का आधिकारिक पता ख़ुद टाइप करें।"
+    },
+    {
+      "id": "p7_fake_env",
+      "card": "P7_FAKE_ENVIRONMENT",
+      "label": "COULDNT_VERIFY",
+      "forgeability": "easy",
+      "title_hi": "चैट में मुनाफ़े की स्क्रीन, बैलेंस या तारीफ़ें हैं",
+      "title_en": "Profit screens, balances or testimonials inside the chat",
+      "why_hi": "चैट या अनजान ऐप में दिखाए गए स्क्रीनशॉट, बैलेंस और तारीफ़ें बनाई जा सकती हैं। ये असली मुनाफ़े का सबूत नहीं हैं।",
+      "why_en": "Screenshots, balances and testimonials shown in a chat or an unknown app can be made up. They are not evidence of real returns.",
+      "source": {
+        "name": "SEBI: fake trading apps guidance",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Real returns show up in your own bank or broker statement, not in screenshots.",
+      "settle_hi": "असली मुनाफ़ा आपके अपने बैंक या ब्रोकर के स्टेटमेंट में दिखता है, स्क्रीनशॉट में नहीं।"
+    }
+  ],
+  "stage": {
+    "index": 5,
+    "name": "WITHDRAWAL_BLOCKED",
+    "name_hi": "निकासी रोकना",
+    "name_en": "Withdrawal blocked or fee",
+    "because_en": "This looks like the \"withdrawal blocked or fee\" stage because it asks for a fee or tax to take money out.",
+    "because_hi": "यह \"निकासी रोकना\" वाले चरण जैसा लगता है क्योंकि पैसा निकालने के लिए फ़ीस या टैक्स माँगा गया है।",
+    "progression": [
+      1,
+      2,
+      3,
+      4,
+      4,
+      5
+    ]
+  },
+  "timeline": [
+    {
+      "sender": "Sender A",
+      "snippet": "Welcome to F&O Winners group. Join for daily free tips.",
+      "stage": 1,
+      "is_payment_ask": false,
+      "is_transition": false
+    },
+    {
+      "sender": "Sender A",
+      "snippet": "Today's call: Nifty buy 24500 CE, target 40 points.",
+      "stage": 2,
+      "is_payment_ask": false,
+      "is_transition": false
+    },
+    {
+      "sender": "Sender B",
+      "snippet": "Sir ne kal ka tip se profit hua, thank you!",
+      "stage": 3,
+      "is_payment_ask": false,
+      "is_transition": false
+    },
+    {
+      "sender": "Sender A",
+      "snippet": "Join our premium app for live tips, small deposit ₹500 to start. Download: http:",
+      "stage": 4,
+      "is_payment_ask": true,
+      "is_transition": true
+    },
+    {
+      "sender": "Sender C",
+      "snippet": "bhai maine ₹500 daala, profit dikh raha hai",
+      "stage": 4,
+      "is_payment_ask": true,
+      "is_transition": false
+    },
+    {
+      "sender": "Sender A",
+      "snippet": "Your account shows profit ₹1.75L. Withdrawal ready, pay ₹5,000 tax to withdraw. ",
+      "stage": 5,
+      "is_payment_ask": true,
+      "is_transition": false
+    }
+  ],
+  "next_steps": [
+    "stop_paying",
+    "dont_pay_withdrawal_fee",
+    "call_1930",
+    "already_paid_flow"
+  ],
+  "payee": {
+    "value": "fnowinners9876@ybl",
+    "type": "personal_style",
+    "kind": "upi"
+  },
+  "situation": "ONGOING",
+  "privacy": {
+    "on_device": [
+      "redaction",
+      "extraction",
+      "rules"
+    ],
+    "sent": [],
+    "to": "nobody (rules ran on this device)",
+    "stored": "none"
+  }
+}

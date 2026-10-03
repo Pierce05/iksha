@@ -1,0 +1,110 @@
+{
+ "header": "HIGH_CONCERN",
+ "action_requested": {
+  "text_hi": "₹5,000 \"tax\" bhejo tabhi apna profit nikal paoge.",
+  "text_en": "Pay ₹5,000 \"tax\" before you can withdraw your profit."
+ },
+ "items": [
+  {
+   "id": "p4",
+   "label": "CONTRADICTED",
+   "forgeability": "hard",
+   "title_hi": "Paisa nikalne ke liye naya deposit/fee",
+   "title_en": "New deposit or fee to withdraw",
+   "why_hi": "Asli platform apna paisa nikalne ke liye naya paisa nahi maangte. Yeh \"withdrawal blocked\" charan se match karta hai.",
+   "why_en": "Genuine platforms do not need new money to release yours. This matches the withdrawal-blocked stage.",
+   "source": {
+    "name": "SEBI fake-app guidance [VERIFY]",
+    "url": "https://www.sebi.gov.in/",
+    "date": "2025"
+   },
+   "settle_hi": "Platform ko SEBI ki authorised-app list mein dhundhein.",
+   "settle_en": "Look for the platform in SEBI's authorised-app list."
+  },
+  {
+   "id": "p7_apk",
+   "label": "COULDNT_VERIFY",
+   "forgeability": "hard",
+   "title_hi": "App store se nahi, .apk link se aaya",
+   "title_en": "App came from an .apk link, not a store",
+   "why_hi": "Store listing ke bina app ka link bharosa nahi dilata.",
+   "why_en": "An app link without a store listing is not reassuring.",
+   "source": {
+    "name": "SEBI authorised-app list [VERIFY]",
+    "url": "https://www.sebi.gov.in/",
+    "date": "2025"
+   },
+   "settle_hi": "Sirf official store ya SEBI list wala app hi use karein.",
+   "settle_en": "Use only apps from an official store or SEBI's list."
+  },
+  {
+   "id": "p7_proof",
+   "label": "COULDNT_VERIFY",
+   "forgeability": "easy",
+   "title_hi": "App mein ₹1.75L profit dikh raha hai",
+   "title_en": "App shows ₹1.75L profit",
+   "why_hi": "App ya chat ki screen asli munafe ka saboot nahi hoti.",
+   "why_en": "Screens inside a chat or unknown app are not evidence of real returns.",
+   "source": {
+    "name": "SEBI [VERIFY]",
+    "url": "https://www.sebi.gov.in/",
+    "date": "2025"
+   },
+   "settle_hi": "Apne bank mein asli paisa aaya ya nahi dekhein.",
+   "settle_en": "Check whether real money arrived in your bank."
+  }
+ ],
+ "stage": {
+  "index": 5,
+  "name": "WITHDRAWAL_BLOCKED",
+  "because_hi": "Kyunki paisa nikalne ke liye aur paise maange ja rahe hain.",
+  "because_en": "Because more money is requested to withdraw."
+ },
+ "next_steps": [
+  "verify_payee_sebi_check",
+  "ask_trusted_person",
+  "stop_payment"
+ ],
+ "payee": {
+  "value": "tax.fee@upi",
+  "type": "personal_style"
+ },
+ "situation": "PREVENTION",
+ "privacy": {
+  "on_device": [
+   "redaction",
+   "extraction"
+  ],
+  "sent": [
+   "1 redacted text"
+  ],
+  "to": "LLM provider",
+  "stored": "none"
+ },
+ "timeline": [
+  {
+   "sender": "Sender A",
+   "snippet": "Tip group: sure shot F&O call, join now",
+   "stage": 1,
+   "is_payment_ask": false
+  },
+  {
+   "sender": "Sender B",
+   "snippet": "Aaj ₹5,000 se ₹9,000 ho gaya! Screenshot dekho",
+   "stage": 2,
+   "is_payment_ask": false
+  },
+  {
+   "sender": "Sender A",
+   "snippet": "App install karo: trade-pro.apk, yahan profit dikhega",
+   "stage": 3,
+   "is_payment_ask": false
+  },
+  {
+   "sender": "Sender A",
+   "snippet": "Profit ₹1.75L ready. ₹5,000 tax bharo tabhi withdraw",
+   "stage": 5,
+   "is_payment_ask": true
+  }
+ ]
+}

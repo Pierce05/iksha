@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "mode": "rules_only",
+  "header": "LOW_CONCERN",
+  "action_requested": {
+    "text_en": "No payment request found in what you shared",
+    "text_hi": "आपके भेजे संदेश में पैसे भेजने की कोई माँग नहीं मिली",
+    "amount": null,
+    "deadline": false,
+    "secrecy": false
+  },
+  "items": [],
+  "stage": null,
+  "next_steps": [
+    "stop_payment",
+    "ask_trusted_person"
+  ],
+  "payee": null,
+  "situation": "PREVENTION",
+  "privacy": {
+    "on_device": [
+      "redaction",
+      "extraction",
+      "rules"
+    ],
+    "sent": [],
+    "to": "nobody (rules ran on this device)",
+    "stored": "none"
+  }
+}

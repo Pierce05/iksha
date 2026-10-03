@@ -1,0 +1,33 @@
+
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#FBF6EA;--card:#fff;--ink:#1B2430;--mut:#5b6472;--line:#1B2430;--pri:#1B2430;--prit:#FBF6EA;--acc:#E8A317;--bad:#A12A1F;--ok:#1F6B45;--unk:#7a5a00}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#14181f;--card:#1d232d;--ink:#f2ece0;--mut:#a9b0bb;--line:#f2ece0;--pri:#E8A317;--prit:#14181f;--bad:#ff8f84;--ok:#7fd6a4;--unk:#f0c765}}
+:root[data-theme=dark]{--bg:#14181f;--card:#1d232d;--ink:#f2ece0;--mut:#a9b0bb;--line:#f2ece0;--pri:#E8A317;--prit:#14181f;--bad:#ff8f84;--ok:#7fd6a4;--unk:#f0c765}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 "Noto Sans Devanagari","Nirmala UI",Mukta,system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px 16px 48px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.logo{font-weight:800;letter-spacing:.12em;font-size:20px}
+button,.btn{font:inherit;min-height:52px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:10px 16px;cursor:pointer;text-align:left;text-decoration:none;display:flex;align-items:center;gap:10px;width:100%;margin:8px 0}
+.pri{background:var(--pri);color:var(--prit)}
+.sm{width:auto;min-height:48px;margin:0;padding:6px 14px}
+h1{font-size:34px;line-height:1.2;margin:20px 0 8px}h2{font-size:21px;margin:26px 0 8px}
+.mut{color:var(--mut);font-size:16px}
+textarea{width:100%;min-height:200px;font:inherit;padding:12px;border:2px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0}
+.card.hard{border-width:3px}.card.easy{border-style:solid;border-width:1px}.card.unk{border-style:dotted}.card.ai{border-style:dashed}
+.chip{display:inline-block;font-size:14px;font-weight:700;border:2px solid currentColor;border-radius:999px;padding:0 10px;margin:0 6px 4px 0}
+.CONTRADICTED{color:var(--bad)}.VERIFIED{color:var(--ok)}.COULDNT_VERIFY{color:var(--unk)}.AI_INTERPRETATION{color:var(--mut)}
+.hdr{border:3px solid var(--line);border-radius:14px;padding:12px 14px;font-weight:800;font-size:22px}
+.action{background:var(--acc);color:#1B2430;border-radius:12px;padding:12px 14px;font-weight:700;margin:12px 0}
+.strip{display:flex;gap:4px;margin:8px 0}.strip div{flex:1;text-align:center;font-size:13px;padding:6px 2px;border:2px solid var(--mut);border-radius:8px;opacity:.45}
+.strip .on{opacity:1;border-color:var(--line);background:var(--pri);color:var(--prit);font-weight:700}
+.tl{border-left:3px solid var(--line);margin:8px 0 8px 8px;padding-left:12px}.tl p{margin:6px 0;font-size:16px}
+.pay{outline:3px solid var(--acc);outline-offset:2px}
+.grid2{display:grid;gap:8px}
+details summary{cursor:pointer;min-height:48px;display:flex;align-items:center}
+a{color:inherit}
+pre{white-space:pre-wrap;font:inherit;margin:0}
+.tag{font-size:13px;border:1px solid var(--mut);border-radius:6px;padding:0 6px;color:var(--mut)}
+.skip{position:absolute;left:-999px}

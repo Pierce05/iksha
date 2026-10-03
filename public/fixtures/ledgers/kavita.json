@@ -1,0 +1,107 @@
+{
+ "header": "HIGH_CONCERN",
+ "action_requested": {
+  "text_hi": "Aaj hi ek personal-style UPI par ₹X bhejna, aur ghar mein kisi ko na batana.",
+  "text_en": "Send ₹X to a personal-style UPI today, and keep it secret from family."
+ },
+ "items": [
+  {
+   "id": "p1_ipo_upi",
+   "label": "CONTRADICTED",
+   "forgeability": "hard",
+   "title_hi": "IPO ke liye kisi aur ke UPI par paisa",
+   "title_en": "Paying a personal UPI for an IPO",
+   "why_hi": "IPO mein aap apne hi UPI se bid karte hain aur paise aapke apne khate mein block hote hain. Yeh SEBI ke bataye tareeke se match nahi karta.",
+   "why_en": "In an IPO you bid with your own UPI and funds are blocked in your own account. This does not match the standard flow described by SEBI.",
+   "source": {
+    "name": "SEBI/NSE IPO UPI process [VERIFY]",
+    "url": "https://www.sebi.gov.in/",
+    "date": "2025"
+   },
+   "settle_hi": "Apne broker ya bank app mein IPO ka bid dekhein.",
+   "settle_en": "Check the IPO bid inside your own broker or bank app."
+  },
+  {
+   "id": "p3_named",
+   "label": "CONTRADICTED",
+   "forgeability": "hard",
+   "title_hi": "\"Guaranteed allotment\" jaisa daava",
+   "title_en": "\"Guaranteed allotment\" style claim",
+   "why_hi": "SEBI ki chetavni mein aise daave dhokhe ke sanket ginaye gaye hain. Yeh unse match karta hai.",
+   "why_en": "SEBI's advisory lists such claims as warning signs. This matches them.",
+   "source": {
+    "name": "SEBI advisory, Aug 2025 [VERIFY]",
+    "url": "https://www.sebi.gov.in/",
+    "date": "2025"
+   }
+  },
+  {
+   "id": "payee",
+   "label": "COULDNT_VERIFY",
+   "forgeability": "hard",
+   "title_hi": "Payee ka UPI SEBI-validated nahi dikhta",
+   "title_en": "Payee UPI does not look SEBI-validated",
+   "why_hi": "Yeh ek aam vyakti jaisa UPI lagta hai. Hum ise verify nahi kar sake.",
+   "why_en": "It looks like an ordinary personal UPI. We could not verify it.",
+   "source": {
+    "name": "SEBI Check [VERIFY]",
+    "url": "https://www.sebi.gov.in/",
+    "date": "2025"
+   },
+   "settle_hi": "SEBI Check par payee daalkar dekhein.",
+   "settle_en": "Search the payee on SEBI Check."
+  },
+  {
+   "id": "p6_reg",
+   "label": "COULDNT_VERIFY",
+   "forgeability": "easy",
+   "title_hi": "Sandesh mein registration number likha hai",
+   "title_en": "A registration number is quoted",
+   "why_hi": "Number copy kiya ja sakta hai. Registry mein milna sirf firm ka hona batata hai, ki aap usi se baat kar rahe hain.",
+   "why_en": "A number can be copied. A registry hit shows the firm exists, not that this sender is that firm.",
+   "source": {
+    "name": "SEBI intermediary page [VERIFY]",
+    "url": "https://www.sebi.gov.in/",
+    "date": "2025"
+   },
+   "settle_hi": "Firm ka contact SEBI ke page se lein, chat ke number se nahi.",
+   "settle_en": "Get the firm's contact from SEBI's page, not from numbers in the chat."
+  },
+  {
+   "id": "ai1",
+   "label": "AI_INTERPRETATION",
+   "forgeability": "easy",
+   "title_hi": "Jaldi aur raaz ka dabav",
+   "title_en": "Urgency and secrecy pressure",
+   "why_hi": "\"Aaj hi\" aur \"ghar mein mat batana\" aapko sochne aur puchne se rokte hain.",
+   "why_en": "\"Today only\" and \"don't tell family\" stop you from thinking and asking."
+  }
+ ],
+ "stage": {
+  "index": 4,
+  "name": "DEPOSIT_PUSH",
+  "because_hi": "Kyunki sandesh mein paise bhejne ki maang hai.",
+  "because_en": "Because the message asks you to send money."
+ },
+ "next_steps": [
+  "verify_payee_sebi_check",
+  "ask_trusted_person",
+  "stop_payment"
+ ],
+ "payee": {
+  "value": "kavita.demo@upi",
+  "type": "personal_style"
+ },
+ "situation": "PREVENTION",
+ "privacy": {
+  "on_device": [
+   "redaction",
+   "extraction"
+  ],
+  "sent": [
+   "1 redacted text"
+  ],
+  "to": "LLM provider",
+  "stored": "none"
+ }
+}

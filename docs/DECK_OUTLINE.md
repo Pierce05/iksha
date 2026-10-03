@@ -1,0 +1,2 @@
+# Deck (<10 slides)
+1 Problem & persona (Kavita) · 2 Landscape (SEBI Check, I4C, 1930, generic checkers, the gap; "as far as we found") · 3 Why checkers fail · 4 Process mismatch idea · 5 Journey screens · 6 Architecture: evidence vs AI · 7 Privacy & guardrails · 8 Evaluation + "Where SACH is wrong" · 9 Scalability (SEBI/NSDL card updates, API hand-off) + roadmap · Disclosure slide: LLM provider, Bhashini/Sarvam, Tesseract.js, hosting, browser speech APIs.

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SACH Ledger", "type": "object", "additionalProperties": false,
+  "required": ["schema_version","mode","header","action_requested","items","stage","next_steps","payee","situation","privacy"],
+  "definitions": {
+    "source": {"type":"object","additionalProperties":false,"required":["name","url","date","verified"],"properties":{"name":{"type":"string"},"url":{"type":"string"},"date":{"type":"string"},"verified":{"type":"boolean"}}},
+    "item": {"type":"object","additionalProperties":false,
+      "required":["id","card","label","forgeability","title_hi","title_en","why_hi","why_en"],
+      "properties":{"id":{"type":"string"},"card":{"type":"string"},
+        "label":{"enum":["VERIFIED","CONTRADICTED","COULDNT_VERIFY","AI_INTERPRETATION"]},"forgeability":{"enum":["hard","easy"]},
+        "title_hi":{"type":"string"},"title_en":{"type":"string"},"why_hi":{"type":"string"},"why_en":{"type":"string"},
+        "source":{"$ref":"#/definitions/source"},"settle_hi":{"type":"string"},"settle_en":{"type":"string"},"rephrased_by_ai":{"type":"boolean"}},
+      "allOf":[
+        {"if":{"properties":{"label":{"const":"AI_INTERPRETATION"}}},"else":{"required":["source"]}},
+        {"if":{"properties":{"label":{"const":"COULDNT_VERIFY"}}},"then":{"required":["settle_hi","settle_en"]}}]}
+  },
+  "properties": {
+    "schema_version":{"const":1},"mode":{"enum":["rules_only","llm"]},
+    "header":{"enum":["HIGH_CONCERN","MIXED_SIGNALS","LOW_CONCERN","CANT_VERIFY"]},
+    "action_requested":{"type":"object","additionalProperties":false,"required":["text_hi","text_en","amount","deadline","secrecy"],
+      "properties":{"text_hi":{"type":"string"},"text_en":{"type":"string"},"amount":{"type":["number","null"]},"deadline":{"type":"boolean"},"secrecy":{"type":"boolean"}}},
+    "items":{"type":"array","items":{"$ref":"#/definitions/item"}},
+    "stage":{"type":["object","null"],"additionalProperties":false,"required":["index","name","name_hi","name_en","because_hi","because_en"],
+      "properties":{"index":{"enum":[1,2,3,4,5]},"name":{"enum":["HOOK","TRUST_BUILDING","FAKE_PROOF","DEPOSIT_PUSH","WITHDRAWAL_BLOCKED"]},
+        "name_hi":{"type":"string"},"name_en":{"type":"string"},"because_hi":{"type":"string"},"because_en":{"type":"string"},
+        "progression":{"type":"array","items":{"type":["integer","null"]}}}},
+    "timeline":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["sender","snippet","stage","is_payment_ask","is_transition"],
+      "properties":{"sender":{"type":"string"},"snippet":{"type":"string"},"stage":{"type":["integer","null"]},"is_payment_ask":{"type":"boolean"},"is_transition":{"type":"boolean"}}}},
+    "next_steps":{"type":"array","items":{"enum":["stop_payment","verify_payee_sebi_check","ask_trusted_person","dont_engage","report_i4c_and_telecom","keep_screenshots","already_paid_flow","call_1930","report_cybercrime","tell_bank","report_scores","stop_paying","dont_pay_withdrawal_fee"]}},
+    "payee":{"type":["object","null"],"additionalProperties":false,"required":["value","type","kind"],
+      "properties":{"value":{"type":"string"},"type":{"enum":["validated_pattern","personal_style","unknown"]},"kind":{"enum":["upi","account"]}}},
+    "situation":{"enum":["PREVENTION","ATTEMPTED","PAID","ONGOING"]},
+    "privacy":{"type":"object","additionalProperties":false,"required":["on_device","sent","to","stored"],
+      "properties":{"on_device":{"type":"array","items":{"type":"string"}},"sent":{"type":"array","items":{"type":"string"}},"to":{"type":"string"},"stored":{"const":"none"}}}
+  }
+}

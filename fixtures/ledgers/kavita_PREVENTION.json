@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "mode": "rules_only",
+  "header": "HIGH_CONCERN",
+  "action_requested": {
+    "text_en": "Send ₹20,000 to a personal-style UPI ID for IPO allotment, today; keep it secret.",
+    "text_hi": "₹20,000 किसी के निजी UPI पर (IPO अलॉटमेंट के लिए) भेजें, आज ही; किसी को न बताएँ।",
+    "amount": 20000,
+    "deadline": true,
+    "secrecy": true
+  },
+  "items": [
+    {
+      "id": "p1_ipo_upi",
+      "card": "P1_IPO_UPI",
+      "label": "CONTRADICTED",
+      "forgeability": "hard",
+      "title_hi": "IPO अलॉटमेंट के लिए किसी और को पैसे भेजने को कहा गया है",
+      "title_en": "Asked to pay someone else for IPO allotment",
+      "why_hi": "सामान्य IPO आवेदन में आप अपनी ही UPI ID से बोली लगाते हैं और आपके अपने खाते में पैसे रोके जाते हैं। अलॉटमेंट के लिए किसी तीसरे व्यक्ति को पैसे भेजना SEBI की बताई सामान्य प्रक्रिया से मेल नहीं खाता।",
+      "why_en": "In a normal IPO application you bid from your own UPI ID and approve a mandate that blocks money in your own account. Paying a third party for allotment does not match the standard flow described by SEBI.",
+      "source": {
+        "name": "SEBI: applying for IPOs through UPI",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Apply only from your own broker or bank app, with your own UPI ID.",
+      "settle_hi": "आवेदन सिर्फ़ अपने ब्रोकर या बैंक के ऐप से, अपनी ही UPI ID से करें।"
+    },
+    {
+      "id": "p3_sebi_named_claims",
+      "card": "P3_SEBI_NAMED_CLAIMS",
+      "label": "CONTRADICTED",
+      "forgeability": "hard",
+      "title_hi": "ऑफ़र उन दावों जैसा है जिन्हें SEBI ने चेतावनी के संकेत बताया है",
+      "title_en": "Offer matches claims SEBI has named as warning signs",
+      "why_hi": "SEBI की एडवाइज़री में पक्का IPO अलॉटमेंट, इंस्टीट्यूशनल ट्रेडिंग खाता, सस्ता IPO/ब्लॉक डील और एंकर एक्सेस को चेतावनी के संकेत बताया गया है। यह संदेश उन संकेतों से मेल खाता है।",
+      "why_en": "SEBI's advisory names guaranteed IPO allotment, institutional trading accounts, discounted IPO/block deals and anchor access as warning signs. This message matches those signals.",
+      "source": {
+        "name": "SEBI advisory, Aug 2025 (IPO allotment claims)",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "No registered broker can guarantee allotment. Ask your own broker.",
+      "settle_hi": "कोई रजिस्टर्ड ब्रोकर अलॉटमेंट की गारंटी नहीं दे सकता। अपने ब्रोकर से पूछें।"
+    },
+    {
+      "id": "p2_payee_unverified",
+      "card": "P2_BROKER_PAYMENT",
+      "label": "COULDNT_VERIFY",
+      "forgeability": "hard",
+      "title_hi": "जिसे पैसे भेजने को कहा गया है, उसकी जाँच नहीं हो सकी",
+      "title_en": "Payment destination could not be verified",
+      "why_hi": "यह पेमेंट ID उस वैलिडेटेड पैटर्न जैसी नहीं है जो SEBI ने रजिस्टर्ड ब्रोकर और फंड के लिए बताया है। यह एक अतिरिक्त जाँच है, नियम नहीं, इसलिए सिर्फ़ इससे कुछ साबित नहीं होता।",
+      "why_en": "This payment ID does not follow the validated-handle pattern SEBI describes for registered brokers and funds. Validated handles are an extra check, not a rule, so this alone proves nothing.",
+      "source": {
+        "name": "SEBI Check / validated UPI handles",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Search this ID on SEBI Check before paying. If it is not listed, do not pay.",
+      "settle_hi": "पैसे भेजने से पहले इस ID को SEBI Check पर खोजें। सूची में न मिले तो पैसे न भेजें।"
+    },
+    {
+      "id": "p6_identity_channel",
+      "card": "P6_IDENTITY_VS_CHANNEL",
+      "label": "COULDNT_VERIFY",
+      "forgeability": "hard",
+      "title_hi": "पेमेंट, लिंक या संपर्क उस कंपनी से जुड़ा नहीं दिखता जिसका नाम लिया गया",
+      "title_en": "Payment, link or contact is not tied to the firm named",
+      "why_hi": "संदेश किसी रजिस्टर्ड कंपनी का नाम लेता है, पर ऐसा कुछ नहीं दिखता कि दी गई पेमेंट ID, लिंक या नंबर उसी कंपनी का है।",
+      "why_en": "The message names a registered firm, but nothing shows that the payment ID, link or number it gives belongs to that firm.",
+      "source": {
+        "name": "SEBI: intermediary search",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Check the firm's contact on SEBI's intermediary page. Do not use numbers from the chat.",
+      "settle_hi": "SEBI के इंटरमीडियरी पेज पर कंपनी का संपर्क जाँचें। चैट वाले नंबर का इस्तेमाल न करें।"
+    },
+    {
+      "id": "p6_reg_easy",
+      "card": "P6_IDENTITY_VS_CHANNEL",
+      "label": "COULDNT_VERIFY",
+      "forgeability": "easy",
+      "title_hi": "SEBI रजिस्ट्रेशन नंबर बताया गया है",
+      "title_en": "A SEBI registration number is quoted",
+      "why_hi": "असली रजिस्ट्रेशन नंबर कोई भी कॉपी कर सकता है। नंबर सही हो तब भी इतना ही पता चलता है कि कंपनी है, यह नहीं कि भेजने वाला वही कंपनी है। हम इसे अच्छा संकेत नहीं मानते।",
+      "why_en": "Anyone can copy a real registration number. Even if the number exists, it only shows that a firm exists, not that this sender is that firm. We do not count it as a good sign.",
+      "source": {
+        "name": "SEBI: intermediary search",
+        "url": "https://www.sebi.gov.in",
+        "date": "",
+        "verified": false
+      },
+      "settle_en": "Find the firm on SEBI's intermediary page and use the contact details listed there, not numbers from the chat.",
+      "settle_hi": "SEBI के इंटरमीडियरी पेज पर कंपनी खोजें और वहाँ दिए संपर्क का इस्तेमाल करें, चैट के नंबर का नहीं।"
+    }
+  ],
+  "stage": {
+    "index": 4,
+    "name": "DEPOSIT_PUSH",
+    "name_hi": "पैसे जमा करवाना",
+    "name_en": "Deposit push",
+    "because_en": "This looks like the \"deposit push\" stage because it asks you to send money.",
+    "because_hi": "यह \"पैसे जमा करवाना\" वाले चरण जैसा लगता है क्योंकि पैसे भेजने को कहा गया है।"
+  },
+  "next_steps": [
+    "stop_payment",
+    "verify_payee_sebi_check",
+    "ask_trusted_person"
+  ],
+  "payee": {
+    "value": "rajeshipo.8800112233@okaxis",
+    "type": "personal_style",
+    "kind": "upi"
+  },
+  "situation": "PREVENTION",
+  "privacy": {
+    "on_device": [
+      "redaction",
+      "extraction",
+      "rules"
+    ],
+    "sent": [],
+    "to": "nobody (rules ran on this device)",
+    "stored": "none"
+  }
+}
