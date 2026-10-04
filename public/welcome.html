@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IKSHA ईक्षा – Before you send, look.</title>
+<meta name="description" content="IKSHA compares what the sender claims with what they ask you to do, and puts the evidence in front of you.">
+<meta name="theme-color" content="#12204A">
+<meta property="og:title" content="IKSHA ईक्षा – Before you send, look.">
+<meta property="og:description" content="IKSHA compares what the sender claims with what they ask you to do, and puts the evidence in front of you.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Mukta:wght@400;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --neel:#12204A;--haldi:#F4B400;--kumkum:#C21E14;--patta:#0B5C50;
+  --bg:#F4F6FA;--ink:#0E1830;--muted:#4A5573;--card:#FFFFFF;--line:#CFD6E6;
+  --head:#12204A;--slate:#2F4558;--slatebg:#E8EFF5;--sticker:#FFF1BF;--link:#12204A;
+  --focus:#12204A;--lattice:.07;--invert:0;
+  --f-head:"Rozha One","Noto Serif Devanagari",Georgia,serif;
+  --f-body:"Mukta","Noto Sans Devanagari",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono","Mukta",ui-monospace,Menlo,Consolas,monospace;
+}
+:root[data-theme="dark"]{
+  --bg:#0A1124;--ink:#E9EDF7;--muted:#AEB8D2;--card:#132041;--line:#2B3965;
+  --head:#F4F6FA;--sticker:#3B3317;--link:#FFD45A;--focus:#FFD45A;--lattice:.09;--invert:1;
+  --slate:#2F4558;--slatebg:#E8EFF5;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1124;--ink:#E9EDF7;--muted:#AEB8D2;--card:#132041;--line:#2B3965;
+    --head:#F4F6FA;--sticker:#3B3317;--link:#FFD45A;--focus:#FFD45A;--lattice:.09;--invert:1;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);min-width:320px}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:var(--lattice);filter:invert(var(--invert));
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cg fill='none' stroke='%2312204A' stroke-width='1.2'%3E%3Cpath d='M28 2l26 26-26 26L2 28z'/%3E%3Ccircle cx='28' cy='28' r='8'/%3E%3Cpath d='M28 12v8M28 36v8M12 28h8M36 28h8'/%3E%3C/g%3E%3C/svg%3E")}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.dark-zone{--focus:#FFD45A}
+.skip{position:absolute;left:12px;top:-80px;z-index:50;background:var(--haldi);color:#0E1830;padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none}
+.skip:focus{top:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--f-head);font-weight:400;color:var(--head);margin:0;line-height:1.2}
+h2{font-size:clamp(1.6rem,5.5vw,2.3rem);margin-bottom:20px}
+h3{font-size:1.2rem}
+section{padding:44px 0}
+
+/* top bar */
+.bar{background:var(--neel);color:#fff}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 8px;padding-top:8px;padding-bottom:8px}
+.logo{display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-family:var(--f-head);font-size:1.3rem;min-height:48px}
+.logo svg{width:42px;height:28px;flex:none}
+.tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tbtn{min-width:48px;min-height:48px;padding:0 10px;border-radius:12px;border:2px solid rgba(255,255,255,.55);background:transparent;color:#fff;font:700 .95rem var(--f-body);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:2px}
+.tbtn:hover{background:rgba(255,255,255,.12)}
+.tbtn .on{color:var(--neel);background:var(--haldi);border-radius:6px;padding:0 6px}
+.tbtn .off{padding:0 6px;opacity:.85}
+.tbtn svg{width:22px;height:22px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:14px;font:700 1.05rem var(--f-body);text-decoration:none;border:2px solid transparent;cursor:pointer}
+.btn-p{background:var(--haldi);color:#0E1830}
+.btn-p:hover{background:#FFC82E}
+.btn-g{background:transparent;color:var(--head);border-color:var(--head)}
+.btn-g:hover{background:rgba(127,140,180,.15)}
+.bar .btn{min-height:48px;padding:0 16px;font-size:.95rem}
+
+/* hero */
+.hero{padding:36px 0 28px}
+.hero .wrap{display:grid;gap:30px}
+.hero h1{font-size:clamp(2.2rem,9vw,3.9rem)}
+.hero p.sub{font-size:1.15rem;color:var(--muted);margin:14px 0 22px;max-width:36em}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.small{margin:18px 0 0;font:500 .95rem var(--f-mono);color:var(--muted)}
+
+/* example card */
+.ex{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(18,32,74,.1);min-width:0}
+.tag{display:inline-block;font:500 .8rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--muted);border-radius:6px;padding:2px 8px}
+.bubble{margin:14px 0 8px;background:#DCF3E9;color:#0E1830;padding:12px 14px;border-radius:16px 16px 16px 4px;max-width:92%;font-size:1rem}
+.ex h3{margin:16px 0 10px;font-size:1.25rem}
+.rows{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.row{border:1px solid var(--line);border-left-width:6px;border-radius:12px;background:var(--card);opacity:0;animation:rise .5s ease forwards;animation-delay:calc(var(--i) * .4s + .3s)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.v-contra{border-left-color:var(--kumkum)}
+.v-ver{border-left-color:var(--patta)}
+.v-cant{border-left-color:var(--slate)}
+.v-ai{border-left-color:var(--haldi)}
+.row{display:flex;flex-direction:column}
+.rowbtn{display:block;min-height:48px;padding:10px 40px 10px 12px;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer;position:relative}
+.rowbtn::after{content:"";position:absolute;right:16px;top:22px;width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s}
+.rowbtn[aria-expanded="true"]::after{transform:rotate(-135deg);top:26px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.pill{font:600 .78rem var(--f-mono);letter-spacing:.04em;padding:3px 9px;border-radius:999px;color:#fff;text-transform:uppercase}
+.p-contra{background:var(--kumkum)}
+.p-ver{background:var(--patta)}
+.p-cant{background:var(--slate);color:#fff}
+.p-ai{background:var(--haldi);color:#0E1830}
+.plate,.sticker{font:600 .78rem var(--f-mono);display:inline-flex;align-items:center;gap:5px;padding:2px 9px;color:var(--ink)}
+.plate{border:2px solid var(--ink);border-radius:6px;background:linear-gradient(135deg,rgba(150,160,185,.35),rgba(150,160,185,.1));box-shadow:inset 0 0 0 2px var(--card)}
+.plate svg{width:12px;height:14px}
+.sticker{border:2px dashed var(--muted);border-radius:4px 14px 4px 4px;background:var(--sticker);transform:rotate(-1.5deg);position:relative}
+.sticker::after{content:"";position:absolute;right:-2px;top:-2px;width:11px;height:11px;background:linear-gradient(225deg,var(--card) 50%,rgba(0,0,0,.18) 50%);border-radius:0 12px 0 4px}
+.rowtxt{font:400 .95rem/1.5 var(--f-mono);display:block}
+.why{padding:0 14px 12px;color:var(--muted);font-size:.98rem;border-top:1px dashed var(--line);margin:0 12px;padding:10px 2px 12px}
+
+/* road */
+.road{list-style:none;margin:0;padding:4px 2px 14px;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.road li{flex:0 0 68%;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;position:relative;min-width:0}
+.num{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--neel);color:#fff;font:500 1.15rem var(--f-mono);border:3px solid var(--haldi);margin-bottom:10px}
+.road li:last-child .num{background:var(--kumkum)}
+.road strong{display:block;font-size:1.1rem;font-weight:700}
+.cap{margin:10px 0 0;color:var(--muted);font-weight:600}
+
+/* grids */
+.grid{display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}
+.card p{margin:8px 0 0;color:var(--muted)}
+.how .num{background:var(--haldi);color:#0E1830;border-color:var(--neel)}
+
+/* already paid */
+.paid{background:var(--card);border-block:4px solid var(--kumkum)}
+.links{display:grid;gap:12px;margin-top:16px}
+.lk{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px;padding:12px 16px;border:2px solid var(--kumkum);border-radius:14px;text-decoration:none;font-weight:700;color:var(--ink);background:var(--bg)}
+.lk:hover{background:rgba(194,30,20,.08)}
+.lk span.go{font:500 1.2rem var(--f-mono);color:var(--kumkum)}
+.note{margin:14px 0 0;color:var(--muted);font-weight:600}
+
+/* privacy */
+.col h3{font-size:1.1rem}
+.col{border-top:6px solid var(--neel)}
+.col:nth-child(2){border-top-color:var(--haldi)}
+.col:nth-child(3){border-top-color:var(--muted);border-top-style:dashed}
+.tagline{font:500 1.15rem/1.4 var(--f-mono);color:var(--head);margin:22px 0 6px}
+
+/* limits */
+.lim{border-left:6px solid var(--haldi);font-weight:600}
+
+/* faq */
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px}
+summary{min-height:52px;padding:12px 44px 12px 16px;cursor:pointer;font-weight:700;list-style:none;position:relative;display:flex;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:16px;font:500 1.4rem var(--f-mono);color:var(--muted)}
+details[open] summary::after{content:"–"}
+details p{margin:0;padding:0 16px 16px;color:var(--muted)}
+
+/* cta */
+.cta{background:var(--neel);color:#fff;padding:48px 0;text-align:center}
+.cta .btn-p{min-height:60px;font-size:1.25rem;padding:0 36px}
+.cta .btn-g{color:#fff;border-color:#fff}
+.cta .btns{justify-content:center}
+.qr{margin:26px auto 0;display:inline-block;background:#fff;color:#0E1830;padding:12px;border-radius:14px}
+.qr img{display:block;width:150px;height:150px}
+.qr figcaption{font-weight:600;margin-top:6px;font-size:.95rem}
+.team{margin:20px 0 0;font:500 .95rem var(--f-mono);color:#D8E0F5}
+footer{background:#0B1530;color:#D8E0F5;padding:20px 0;text-align:center;font-size:.95rem}
+footer p{margin:0}
+[hidden]{display:none!important}
+
+@media (min-width:700px){
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .links{grid-template-columns:repeat(3,1fr)}
+  .road li{flex:1 0 0}
+  .road{overflow:visible}
+  .road li:not(:last-child)::after{content:"";position:absolute;right:-13px;top:38px;width:14px;border-top:3px solid var(--haldi)}
+}
+@media (min-width:960px){
+  .hero .wrap{grid-template-columns:1.05fr 1fr;align-items:center;gap:44px}
+  section{padding:60px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .row{opacity:1;animation:none}
+  .rowbtn::after{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip"></a>
+
+<header class="bar dark-zone">
+  <div class="wrap">
+    <a class="logo" href="#main" aria-label="IKSHA ईक्षा">
+      <svg viewBox="0 0 48 32" aria-hidden="true"><path d="M2 16C8 6 16 3 24 3s16 3 22 13c-6 10-14 13-22 13S8 26 2 16z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><circle cx="24" cy="16" r="9.5" fill="#F4B400"/><rect x="19.8" y="11" width="3.4" height="10" rx="1" fill="#12204A"/><rect x="24.8" y="11" width="3.4" height="10" rx="1" fill="#12204A"/></svg>
+      <span>IKSHA ईक्षा</span>
+    </a>
+    <div class="tools">
+      <button class="tbtn" id="langBtn" type="button" data-i18n-aria="langAria"><span class="on" id="lEn">EN</span><span class="off" id="lHi">हि</span></button>
+      <button class="tbtn" id="themeBtn" type="button" data-i18n-aria="themeAria"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <a class="btn btn-p" href="/" data-i18n="try"></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" aria-labelledby="h-hero">
+  <div class="wrap">
+    <div>
+      <h1 id="h-hero" data-i18n="h1"></h1>
+      <p class="sub" data-i18n="sub"></p>
+      <div class="btns">
+        <a class="btn btn-p" href="/" data-i18n="try"></a>
+        <a class="btn btn-g" data-demo target="_blank" rel="noopener" data-i18n="demo" hidden></a>
+      </div>
+      <p class="small" data-i18n="small"></p>
+    </div>
+
+    <div class="ex" aria-labelledby="h-ledger">
+      <span class="tag" data-i18n="example"></span>
+      <div class="bubble" data-i18n="bubble"></div>
+      <h3 id="h-ledger" data-i18n="ledger"></h3>
+      <ul class="rows">
+        <li class="row v-contra" style="--i:0">
+          <button class="rowbtn" type="button" aria-expanded="false" aria-controls="w1">
+            <span class="meta"><span class="pill p-contra" data-i18n="lbl_contra"></span><span class="plate"><svg viewBox="0 0 12 14" aria-hidden="true"><rect x="1" y="6" width="10" height="7.5" rx="1.5" fill="currentColor"/><path d="M3 6V4a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="hard"></span></span></span>
+            <span class="rowtxt" data-i18n="r1t"></span>
+          </button>
+          <div class="why" id="w1" hidden data-i18n="r1w"></div>
+        </li>
+        <li class="row v-ver" style="--i:1">
+          <button class="rowbtn" type="button" aria-expanded="false" aria-controls="w2">
+            <span class="meta"><span class="pill p-ver" data-i18n="lbl_ver"></span><span class="plate"><svg viewBox="0 0 12 14" aria-hidden="true"><rect x="1" y="6" width="10" height="7.5" rx="1.5" fill="currentColor"/><path d="M3 6V4a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="hard"></span></span></span>
+            <span class="rowtxt" data-i18n="r2t"></span>
+          </button>
+          <div class="why" id="w2" hidden data-i18n="r2w"></div>
+        </li>
+        <li class="row v-cant" style="--i:2">
+          <button class="rowbtn" type="button" aria-expanded="false" aria-controls="w3">
+            <span class="meta"><span class="pill p-cant" data-i18n="lbl_cant"></span><span class="sticker" data-i18n="easy"></span></span>
+            <span class="rowtxt" data-i18n="r3t"></span>
+          </button>
+          <div class="why" id="w3" hidden data-i18n="r3w"></div>
+        </li>
+        <li class="row v-ai" style="--i:3">
+          <button class="rowbtn" type="button" aria-expanded="false" aria-controls="w4">
+            <span class="meta"><span class="pill p-ai" data-i18n="lbl_ai"></span><span class="sticker" data-i18n="easy"></span></span>
+            <span class="rowtxt" data-i18n="r4t"></span>
+          </button>
+          <div class="why" id="w4" hidden data-i18n="r4w"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-road">
+  <div class="wrap">
+    <h2 id="h-road" data-i18n="road_t"></h2>
+    <ol class="road">
+      <li><span class="num" aria-hidden="true">1</span><strong data-i18n="s1"></strong></li>
+      <li><span class="num" aria-hidden="true">2</span><strong data-i18n="s2"></strong></li>
+      <li><span class="num" aria-hidden="true">3</span><strong data-i18n="s3"></strong></li>
+      <li><span class="num" aria-hidden="true">4</span><strong data-i18n="s4"></strong></li>
+      <li><span class="num" aria-hidden="true">5</span><strong data-i18n="s5"></strong></li>
+    </ol>
+    <p class="cap" data-i18n="road_cap"></p>
+  </div>
+</section>
+
+<section class="how" aria-labelledby="h-how">
+  <div class="wrap">
+    <h2 id="h-how" data-i18n="how_t"></h2>
+    <div class="grid g3">
+      <div class="card"><span class="num" aria-hidden="true">1</span><h3 data-i18n="hw1t"></h3><p data-i18n="hw1d"></p></div>
+      <div class="card"><span class="num" aria-hidden="true">2</span><h3 data-i18n="hw2t"></h3><p data-i18n="hw2d"></p></div>
+      <div class="card"><span class="num" aria-hidden="true">3</span><h3 data-i18n="hw3t"></h3><p data-i18n="hw3d"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="paid" id="already-paid" aria-labelledby="h-paid">
+  <div class="wrap">
+    <h2 id="h-paid" data-i18n="paid_t"></h2>
+    <p style="margin:0" data-i18n="paid_x"></p>
+    <div class="links">
+      <a class="lk" href="tel:1930"><span data-i18n="p1"></span><span class="go" aria-hidden="true">→</span></a>
+      <a class="lk" href="https://cybercrime.gov.in" target="_blank" rel="noopener"><span data-i18n="p2"></span><span class="go" aria-hidden="true">↗</span></a>
+      <a class="lk" href="https://scores.sebi.gov.in" target="_blank" rel="noopener"><span data-i18n="p3"></span><span class="go" aria-hidden="true">↗</span></a>
+    </div>
+    <p class="note" data-i18n="paid_n"></p>
+  </div>
+</section>
+
+<section aria-labelledby="h-priv">
+  <div class="wrap">
+    <h2 id="h-priv" data-i18n="priv_t"></h2>
+    <div class="grid g3">
+      <div class="card col"><h3 data-i18n="c1t"></h3><p data-i18n="c1d"></p></div>
+      <div class="card col"><h3 data-i18n="c2t"></h3><p data-i18n="c2d"></p></div>
+      <div class="card col"><h3 data-i18n="c3t"></h3><p data-i18n="c3d"></p></div>
+    </div>
+    <p class="tagline" data-i18n="tagline"></p>
+    <p class="note" data-i18n="priv_note"></p>
+  </div>
+</section>
+
+<section aria-labelledby="h-lim">
+  <div class="wrap">
+    <h2 id="h-lim" data-i18n="lim_t"></h2>
+    <div class="grid g2">
+      <div class="card lim" data-i18n="l1"></div>
+      <div class="card lim" data-i18n="l2"></div>
+      <div class="card lim" data-i18n="l3"></div>
+      <div class="card lim" data-i18n="l4"></div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="h-faq">
+  <div class="wrap">
+    <h2 id="h-faq" data-i18n="faq_t"></h2>
+    <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+    <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+    <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+    <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+    <details><summary data-i18n="q5"></summary><p data-i18n="a5"></p></details>
+  </div>
+</section>
+
+<section class="cta dark-zone" aria-label="IKSHA">
+  <div class="wrap">
+    <div class="btns">
+      <a class="btn btn-p" href="/" data-i18n="try"></a>
+      <a class="btn btn-g" data-demo target="_blank" rel="noopener" data-i18n="demo" hidden></a>
+      <button class="btn btn-g" id="copyBtn" type="button" data-i18n="copy"></button>
+    </div>
+    <span class="sr" id="copyLive" role="status" aria-live="polite"></span>
+    <figure class="qr" id="qrBox" hidden style="margin-inline:auto">
+      <img id="qrImg" alt="" width="150" height="150">
+      <figcaption data-i18n="qr_cap"></figcaption>
+    </figure>
+    <p class="team" id="teamLine" hidden></p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><p data-i18n="footer"></p></div></footer>
+
+<script>
+const CONFIG = {
+  DEMO_VIDEO_URL: "",   // empty => hide the "Watch demo" buttons
+  LIVE_URL: "",         // empty => use window.location.origin + "/"
+  TEAM: "",   // empty => hide the team line
+  REPO_URL: "https://github.com/Pierce05/iksha",
+  GITHUB_HANDLE: "pierce05",
+  QR_IMAGE: "/qr.png"   // <img> hides itself on error (onerror)
+};
+
+const T = {
+  en: {
+    skip:"Skip to content", langAria:"Switch language between English and Hindi", themeAria:"Switch light or dark theme",
+    try:"Try IKSHA", demo:"Watch the demo",
+    h1:"Before you send, look.",
+    sub:"Paste an investment message. IKSHA compares what the sender claims with what they ask you to do, and puts the evidence in front of you.",
+    small:"No score. No verdict. Just evidence.",
+    example:"Example only",
+    bubble:"Send ₹20,000 to this personal UPI ID today only. Don't tell family.",
+    ledger:"Evidence Ledger",
+    lbl_contra:"Contradicted", lbl_ver:"Verified", lbl_cant:"Couldn't verify", lbl_ai:"AI interpretation",
+    hard:"Hard to fake", easy:"Easy to fake",
+    r1t:"Asks you to pay a personal UPI ID for an investment.", r1w:"A standard IPO application does not ask you to transfer money to an individual.",
+    r2t:"Amount ₹20,000 and the deadline 'today only' appear in the message.", r2w:"These words are literally in the text you pasted.",
+    r3t:"A registration number quoted in a chat.", r3w:"Anyone can quote one. Look it up yourself on SEBI's website.",
+    r4t:"'Don't tell family' is a secrecy pattern.", r4w:"This is an explanation, not a new finding.",
+    road_t:"How these messages unfold",
+    s1:"Hook", s2:"Trust building", s3:"Fake proof or app", s4:"Deposit push", s5:"Withdrawal blocked or fee",
+    road_cap:"IKSHA shows which stage a chat has reached.",
+    how_t:"How it works",
+    hw1t:"Pause", hw1d:"Stop the rush before you act.",
+    hw2t:"Paste or speak", hw2d:"WhatsApp, Telegram, or a chat export.",
+    hw3t:"Read the ledger", hw3d:"See the payee, amount, deadline and claims, then use the official checks.",
+    paid_t:"Already sent money?", paid_x:"Act fast and keep the screenshots and transaction details.",
+    p1:"Call 1930 (national cyber helpline)", p2:"Report at cybercrime.gov.in", p3:"Complain on SEBI SCORES",
+    paid_n:"IKSHA cannot promise a recovery.",
+    priv_t:"Privacy",
+    c1t:"On your device", c1d:"Phone numbers, emails, OTPs and ID numbers are hidden. The rules run here.",
+    c2t:"Our server", c2d:"Runs the same rules. We do not keep your messages.",
+    c3t:"AI provider, optional", c3d:"Only rewords the explanation. It cannot add a finding or change a label. If it is slow, IKSHA shows the rules-only result.",
+    tagline:"Rules find the evidence. AI only explains it.",
+    priv_note:"Every result includes a privacy receipt showing what left your device.",
+    lim_t:"Honest limits",
+    l1:"Reworded pitches can avoid known phrases.", l2:"Messages that exist only as an image can be missed.",
+    l3:"IKSHA cannot confirm who a person really is.", l4:"SEBI Check is a guided hand-off, not a live API.",
+    faq_t:"Questions",
+    q1:"Does IKSHA give me a verdict?", a1:"No. It shows evidence and which checks to do yourself.",
+    q2:"Does it work without internet?", a2:"The core rules run on your device, so a basic check works offline.",
+    q3:"Does it store my messages?", a3:"No. See the privacy receipt on every result.",
+    q4:"Can I use my voice?", a4:"Yes, where your browser supports speech input and output.",
+    q5:"Is this financial advice?", a5:"No. It is a prototype that helps you pause and check.",
+    qr_cap:"Scan to open IKSHA", copy:"Copy link", copied:"Copied",
+    footer:"Built for SANGYAN 2026. A prototype, not financial advice."
+  },
+  hi: {
+    skip:"सामग्री पर जाएँ", langAria:"भाषा बदलें: अंग्रेज़ी या हिंदी", themeAria:"लाइट या डार्क थीम बदलें",
+    try:"ईक्षा आज़माएँ", demo:"डेमो देखें",
+    h1:"देखिए, फिर भेजिए।",
+    sub:"निवेश वाला मैसेज पेस्ट करें। ईक्षा देखता है कि भेजने वाला क्या दावा कर रहा है और आपसे क्या करवाना चाहता है, और सबूत आपके सामने रखता है।",
+    small:"कोई स्कोर नहीं। कोई फ़ैसला नहीं। सिर्फ़ सबूत।",
+    example:"सिर्फ़ उदाहरण",
+    bubble:"आज ही इस निजी UPI ID पर ₹20,000 भेजिए। घरवालों को मत बताइए।",
+    ledger:"सबूत की सूची",
+    lbl_contra:"विरोधाभासी", lbl_ver:"सत्यापित", lbl_cant:"सत्यापित नहीं हो सका", lbl_ai:"AI व्याख्या",
+    hard:"नकली बनाना कठिन", easy:"नकली बनाना आसान",
+    r1t:"निवेश के लिए निजी UPI ID पर पैसे भेजने को कहा गया है।", r1w:"सामान्य IPO आवेदन में किसी व्यक्ति को पैसे ट्रांसफ़र करने को नहीं कहा जाता।",
+    r2t:"रकम ₹20,000 और 'आज ही' की समय-सीमा मैसेज में मौजूद है।", r2w:"ये शब्द आपके पेस्ट किए पाठ में सीधे लिखे हैं।",
+    r3t:"चैट में बताया गया पंजीकरण नंबर।", r3w:"कोई भी नंबर लिख सकता है। इसे SEBI की वेबसाइट पर खुद देखें।",
+    r4t:"'घरवालों को मत बताइए' गोपनीयता का दबाव है।", r4w:"यह एक व्याख्या है, कोई नया निष्कर्ष नहीं।",
+    road_t:"ऐसे मैसेज कैसे आगे बढ़ते हैं",
+    s1:"शुरुआती लालच", s2:"भरोसा बनाना", s3:"नकली सबूत या ऐप", s4:"पैसे जमा करने का दबाव", s5:"निकासी में रोक या फीस",
+    road_cap:"ईक्षा बताता है कि चैट किस चरण तक पहुँची है।",
+    how_t:"यह कैसे काम करता है",
+    hw1t:"रुकिए", hw1d:"कुछ करने से पहले जल्दबाज़ी रोकिए।",
+    hw2t:"पेस्ट करें या बोलें", hw2d:"WhatsApp, Telegram या चैट एक्सपोर्ट।",
+    hw3t:"सबूत पढ़ें", hw3d:"पाने वाले का खाता, रकम, समय-सीमा और दावे देखें, फिर आधिकारिक जाँच करें।",
+    paid_t:"पैसे भेज चुके हैं?", paid_x:"तुरंत कदम उठाएँ और स्क्रीनशॉट व लेन-देन का विवरण संभालकर रखें।",
+    p1:"1930 पर कॉल करें (राष्ट्रीय साइबर हेल्पलाइन)", p2:"cybercrime.gov.in पर रिपोर्ट करें", p3:"SEBI SCORES पर शिकायत करें",
+    paid_n:"ईक्षा पैसे वापस मिलने का वादा नहीं कर सकता।",
+    priv_t:"प्राइवेसी",
+    c1t:"आपके डिवाइस पर", c1d:"फ़ोन नंबर, ईमेल, OTP और पहचान संख्याएँ छिपाई जाती हैं। नियम यहीं चलते हैं।",
+    c2t:"हमारा सर्वर", c2d:"वही नियम चलाता है। हम आपके मैसेज सहेजकर नहीं रखते।",
+    c3t:"AI प्रदाता (वैकल्पिक)", c3d:"सिर्फ़ व्याख्या को दूसरे शब्दों में लिखता है। नया निष्कर्ष नहीं जोड़ सकता, लेबल नहीं बदल सकता। धीमा होने पर सिर्फ़ नियमों वाला नतीजा दिखता है।",
+    tagline:"नियम सबूत ढूँढते हैं। AI सिर्फ़ समझाता है।",
+    priv_note:"हर नतीजे में एक प्राइवेसी रसीद होती है जो बताती है कि आपके डिवाइस से क्या बाहर गया।",
+    lim_t:"ईमानदार सीमाएँ",
+    l1:"दूसरे शब्दों में लिखे गए प्रस्ताव जाने-पहचाने वाक्यांशों से बच सकते हैं।", l2:"सिर्फ़ तस्वीर के रूप में आए मैसेज छूट सकते हैं।",
+    l3:"ईक्षा यह पुष्टि नहीं कर सकता कि कोई व्यक्ति असल में कौन है।", l4:"SEBI Check एक निर्देशित हैंड-ऑफ़ है, लाइव API नहीं।",
+    faq_t:"सवाल-जवाब",
+    q1:"क्या ईक्षा कोई फ़ैसला सुनाता है?", a1:"नहीं। यह सबूत दिखाता है और बताता है कि कौन-सी जाँच आपको खुद करनी है।",
+    q2:"क्या यह बिना इंटरनेट के चलता है?", a2:"मूल नियम आपके डिवाइस पर चलते हैं, इसलिए बुनियादी जाँच ऑफ़लाइन भी हो जाती है।",
+    q3:"क्या यह मेरे मैसेज सहेजता है?", a3:"नहीं। हर नतीजे पर प्राइवेसी रसीद देखें।",
+    q4:"क्या मैं बोलकर इस्तेमाल कर सकता हूँ?", a4:"हाँ, जहाँ आपका ब्राउज़र बोलकर लिखना और सुनाना समर्थित करता है।",
+    q5:"क्या यह वित्तीय सलाह है?", a5:"नहीं। यह एक प्रोटोटाइप है जो आपको रुकने और जाँचने में मदद करता है।",
+    qr_cap:"ईक्षा खोलने के लिए स्कैन करें", copy:"लिंक कॉपी करें", copied:"कॉपी हो गया",
+    footer:"SANGYAN 2026 के लिए बनाया गया। एक प्रोटोटाइप, वित्तीय सलाह नहीं।"
+  }
+};
+
+(function(){
+  var root = document.documentElement;
+  var lang = "en", saved = null, theme = null;
+  try { saved = localStorage.getItem("iksha_lang"); theme = localStorage.getItem("iksha_theme"); } catch (e) {}
+  if (saved === "en" || saved === "hi") lang = saved;
+  else if ((navigator.language || "").toLowerCase().indexOf("hi") === 0) lang = "hi";
+  if (theme === "light" || theme === "dark") root.setAttribute("data-theme", theme);
+
+  function apply() {
+    var d = T[lang];
+    root.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = d[el.getAttribute("data-i18n")]; });
+    document.querySelectorAll("[data-i18n-aria]").forEach(function (el) { el.setAttribute("aria-label", d[el.getAttribute("data-i18n-aria")]); });
+    document.getElementById("lEn").className = lang === "en" ? "on" : "off";
+    document.getElementById("lHi").className = lang === "hi" ? "on" : "off";
+  }
+
+  document.getElementById("langBtn").addEventListener("click", function () {
+    lang = lang === "en" ? "hi" : "en";
+    try { localStorage.setItem("iksha_lang", lang); } catch (e) {}
+    apply();
+  });
+
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    var cur = root.getAttribute("data-theme");
+    var dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("iksha_theme", next); } catch (e) {}
+  });
+
+  document.querySelectorAll(".rowbtn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var open = b.getAttribute("aria-expanded") === "true";
+      b.setAttribute("aria-expanded", open ? "false" : "true");
+      document.getElementById(b.getAttribute("aria-controls")).hidden = open;
+    });
+  });
+
+  if (CONFIG.DEMO_VIDEO_URL) {
+    document.querySelectorAll("[data-demo]").forEach(function (a) { a.href = CONFIG.DEMO_VIDEO_URL; a.hidden = false; });
+  }
+
+  var t = document.getElementById("teamLine");
+  if (CONFIG.TEAM) {
+    t.textContent = CONFIG.TEAM;
+    t.hidden = false;
+  } else if (CONFIG.REPO_URL) {
+    t.hidden = false;
+    t.innerHTML = "Built by Purvanshi Khandelwal<br>" +
+      '<a href="' + CONFIG.REPO_URL + '" target="_blank" rel="noopener">GitHub repo</a>' +
+      (CONFIG.GITHUB_HANDLE ? " · " + CONFIG.GITHUB_HANDLE : "");
+  }
+
+  if (CONFIG.QR_IMAGE) {
+    var img = document.getElementById("qrImg"), box = document.getElementById("qrBox");
+    img.addEventListener("load", function () { box.hidden = false; });
+    img.addEventListener("error", function () { box.hidden = true; });
+    img.src = CONFIG.QR_IMAGE;
+  }
+
+  var liveUrl = CONFIG.LIVE_URL || (window.location.origin + "/");
+  var cb = document.getElementById("copyBtn"), live = document.getElementById("copyLive"), timer = null;
+  function done() {
+    cb.setAttribute("data-i18n", "copied"); apply(); live.textContent = T[lang].copied;
+    clearTimeout(timer);
+    timer = setTimeout(function () { cb.setAttribute("data-i18n", "copy"); apply(); live.textContent = ""; }, 2000);
+  }
+  cb.addEventListener("click", function () {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(liveUrl).then(done, fallback);
+    } else { fallback(); }
+  });
+  function fallback() {
+    var ta = document.createElement("textarea");
+    ta.value = liveUrl; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  apply();
+})();
+</script>
+</body>
+</html>

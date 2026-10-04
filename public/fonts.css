@@ -1,0 +1,7 @@
+/* Self-hosted fonts: drop subsetted woff2 files in /fonts (Devanagari + Latin). Missing files fall back to local/system fonts. */
+@font-face{font-family:'Mukta';font-weight:400;font-display:swap;src:local('Mukta Regular'),local('Mukta-Regular'),url(fonts/Mukta-400.woff2) format('woff2')}
+@font-face{font-family:'Mukta';font-weight:600;font-display:swap;src:local('Mukta SemiBold'),local('Mukta-SemiBold'),url(fonts/Mukta-600.woff2) format('woff2')}
+@font-face{font-family:'Mukta';font-weight:700;font-display:swap;src:local('Mukta Bold'),local('Mukta-Bold'),url(fonts/Mukta-700.woff2) format('woff2')}
+@font-face{font-family:'Rozha One';font-weight:400;font-display:swap;src:local('Rozha One'),local('RozhaOne-Regular'),url(fonts/RozhaOne-400.woff2) format('woff2')}
+/* Mono: system stack on purpose (saves ~2 files and the rupee-sign question). */
+:root{--fm:ui-monospace,'SF Mono',Menlo,Consolas,'Mukta',monospace}
