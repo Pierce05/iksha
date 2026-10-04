@@ -1,7 +1,663 @@
-<!DOCTYPE html><html lang="hi"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#1B2430"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png">
-<title>SACH — Situation Check</title><link rel="stylesheet" href="styles.css"></head><body>
-<main id="app" aria-live="polite">…</main>
-<script src="config.js"></script><script src="ui-strings.js"></script><script src="app.js"></script>
-<script>if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('sw.js')</script></body></html>
+<!doctype html>
+<html lang="hi" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#12204A">
+<title>ईक्षा · IKSHA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Mukta:wght@400;600;700&family=Rozha+One&display=swap">
+<style>
+:root{--bg:#F4F6FA;--sf:#fff;--ink:#0E1830;--mu:#4A5573;--neel:#12204A;--hal:#F4B400;--kum:#C21E14;--pat:#0B5C50;--kt:#A3170F;--kb:#FDECEA;--ht:#6B4400;--hb:#FFF3CC;--pb:#E3F4F0;--sl:#2F4558;--sb:#E8EFF5;--ai:#4B3B7A;--ab:#F0EDF8;--ln:#B7C1D9;--hero:#12204A;--hi:#F4F6FA;--hm:#C9D3EE;--btn:#12204A;--btnt:#fff;--fo:#12204A;--fh:'Rozha One','Yatra One',serif;--fb:'Mukta','Noto Sans Devanagari',system-ui,sans-serif;--fm:'IBM Plex Mono',ui-monospace,'Mukta',monospace}
+[data-theme=dark]{--bg:#0A1022;--sf:#111A33;--ink:#E8ECF8;--mu:#A6B1D6;--hal:#FFC933;--kt:#FF9A92;--kb:#3A1512;--ht:#FFE08A;--hb:#3A2C06;--pb:#0E2D28;--pat:#8EE0D0;--sl:#C3D3E2;--sb:#1C2D3C;--ai:#CFC3F5;--ab:#271F45;--ln:#34426B;--btn:#FFC933;--btnt:#12204A;--fo:#FFC933;--kum:#FF9A92}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.65 var(--fb);min-height:100vh}
+body.dk{background:#070C1A}[data-theme=light] body.dk{background:#DDE3F0}
+button,select,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--fo);outline-offset:3px;border-radius:4px}
+.hero :focus-visible,.sticky :focus-visible{outline-color:var(--hal)}
+svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#app{container-type:inline-size;margin:0 auto;background:var(--bg);width:min(390px,100%);min-height:100vh;position:relative;padding-bottom:96px;overflow-x:hidden}
+body.dk #app{width:min(1280px,100%);min-height:100vh;box-shadow:0 0 0 1px var(--ln)}
+body.ph #app{box-shadow:0 0 0 1px var(--ln)}
+.hd{display:flex;align-items:center;gap:8px;padding:8px 16px;min-height:64px}
+.hd .sp{flex:1}
+.wm{display:flex;align-items:center;gap:10px;font-family:var(--fh);font-size:26px;line-height:1;color:var(--ink);background:none;border:0;min-height:48px;cursor:pointer;padding:0}
+.wm small{font:600 13px/1 var(--fm);letter-spacing:.14em;color:var(--mu)}
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;min-width:48px;padding:10px 20px;border-radius:14px;border:2px solid var(--btn);background:var(--btn);color:var(--btnt);font-weight:700;font-size:18px;line-height:1.3;cursor:pointer;text-decoration:none}
+.bt.hl{background:var(--hal);border-color:var(--hal);color:#12204A}
+.bt.gh{background:transparent;color:var(--ink);border-color:var(--ln)}
+.bt.sm{padding:6px 14px;font-size:16px}
+.bt[disabled],.bt[aria-disabled=true]{opacity:1;background:var(--sb);color:var(--sl);border:2px dashed var(--ln);cursor:not-allowed}
+.pg{padding:8px 16px 24px}
+.pg>*+*{margin-top:20px}
+h1,h2,h3{margin:0;font-weight:700;line-height:1.3}
+h1{font-family:var(--fh);font-weight:400;font-size:34px;line-height:1.25}
+h2{font-size:20px}h3{font-size:18px}
+.mu{color:var(--mu)}.mo{font-family:var(--fm);font-size:.9em;word-break:break-all}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sec>h2{display:flex;align-items:center;gap:10px}
+.sec>h2 .n{font:600 13px var(--fm);color:var(--mu);letter-spacing:.1em}
+.hero{background:var(--hero);color:var(--hi);margin:0;padding:8px 16px 28px;position:relative;isolation:isolate;border-bottom:6px solid var(--hal)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48' fill='none' stroke='%23F4B400' stroke-opacity='.22' stroke-width='1.2'%3E%3Cpath d='M24 2 46 24 24 46 2 24Z'/%3E%3Ccircle cx='24' cy='24' r='9'/%3E%3Cpath d='M0 0 8 8M48 0 40 8M0 48 8 40M48 48 40 40'/%3E%3C/svg%3E")}
+.hero .wm,.hero .mu{color:var(--hi)}.hero .wm small{color:var(--hm)}
+.hero p{color:var(--hm)}
+.hero .bt.gh{color:var(--hi);border-color:#5C6B99}
+.hero .bt:not(.hl):not(.gh){background:var(--hal);color:#12204A;border-color:var(--hal)}
+.eyebtn{display:block;margin:6px auto 0;background:none;border:0;padding:0;width:min(300px,86%);cursor:pointer}
+.eyebtn svg{width:100%;height:auto;display:block;overflow:visible}
+.lid{transform-origin:150px 0;transform:scaleY(.55);transition:transform .5s}
+.eye.open .lid{transform:scaleY(0)}
+.eyebtn:hover .lid{transform:scaleY(.3)}
+.rg{transform-origin:150px 100px;transform-box:view-box}
+.r1,.r2{animation:rot 15s linear forwards}.r2{animation-delay:15s}
+@keyframes rot{to{transform:rotate(180deg)}}
+.ruko{font-family:var(--fh);font-size:22px;text-align:center;color:var(--hal);margin-top:4px}
+.ins{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
+.ic{display:flex;align-items:center;gap:14px;text-align:left;width:100%;min-height:64px;padding:12px 16px;border-radius:16px;background:var(--sf);color:var(--ink);border:2px solid var(--ln);cursor:pointer;font-weight:700}
+.ic small{display:block;font-weight:400;font-size:15px;color:var(--mu);line-height:1.4}
+.ic svg{color:var(--neel)}[data-theme=dark] .ic svg{color:var(--hal)}
+.ic[aria-disabled=true]{border-style:dashed;background:var(--sb);color:var(--sl);cursor:not-allowed}
+.ex{display:grid;grid-template-columns:1fr;gap:12px}
+.exc{display:block;text-align:left;width:100%;min-height:48px;padding:14px 16px;border-radius:14px;background:var(--sf);border:2px solid var(--ln);cursor:pointer;border-left:8px solid var(--neel)}
+.exc b{display:block}.exc span{font-size:15px;color:var(--mu);line-height:1.45;display:block}
+.exc.k1{border-left-color:var(--kum)}.exc.k2{border-left-color:var(--hal)}.exc.k3,.exc.k4{border-left-color:var(--sl)}
+.ta{width:100%;min-height:220px;padding:14px;border-radius:14px;border:2px solid var(--ln);background:var(--sf);font:400 18px/1.7 var(--fb);resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:6px 16px;border-radius:999px;border:2px solid var(--ln);background:var(--sf);cursor:pointer;font-weight:600}
+.chip[aria-pressed=true]{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
+.sit{display:grid;gap:12px}
+.sc{display:flex;gap:14px;align-items:center;text-align:left;width:100%;min-height:88px;padding:16px;border-radius:18px;border:2px solid var(--ln);background:var(--sf);cursor:pointer;font-weight:700;font-size:19px;line-height:1.4}
+.sc small{display:block;font-weight:400;font-size:15px;color:var(--mu)}
+.sc[aria-pressed=true]{border-color:var(--hal);box-shadow:0 0 0 3px var(--hal)}
+.sc .num{font:600 15px var(--fm);width:34px;height:34px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;flex:none}
+.ck{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ck li{display:flex;gap:12px;align-items:center;min-height:56px;padding:10px 14px;border-radius:14px;background:var(--sf);border:2px solid var(--ln);opacity:.55}
+.ck li.on{opacity:1}.ck li .tk{width:28px;height:28px;border-radius:50%;border:2px dashed var(--mu);display:grid;place-items:center;flex:none}
+.ck li.on .tk{border:2px solid var(--pat);background:var(--pb);color:var(--pat)}.ck li .tk svg{width:18px;height:18px;opacity:0;transform:scale(.4);transition:.3s}.ck li.on .tk svg{opacity:1;transform:none}
+.sk{height:84px;border-radius:14px;background:var(--sb);position:relative;overflow:hidden}
+.sk::after{content:"";position:absolute;inset:0;background:var(--ln);opacity:.5;transform:translateX(-100%);animation:sh 1.2s ease-in-out infinite}
+@keyframes sh{to{transform:translateX(100%)}}
+.vd{border-radius:20px;padding:22px 18px;color:#fff;position:relative;overflow:hidden;animation:rev .45s cubic-bezier(.2,.9,.3,1) both;transform-origin:top;border:3px solid transparent}
+@keyframes rev{from{opacity:0;transform:scaleY(.6) translateY(-12px)}to{opacity:1;transform:none}}
+.vd.HIGH_CONCERN{background:var(--kum);border-color:#7E0E08}
+[data-theme=dark] .vd.HIGH_CONCERN{background:var(--kb);color:var(--kt);border-color:var(--kt)}
+.vd.MIXED_SIGNALS{background:var(--hal);color:#12204A;border-color:#8A6200}
+.vd.LOW_CONCERN,.vd.CANT_VERIFY{background:var(--sl);border-color:#1B2B38}
+[data-theme=dark] .vd.LOW_CONCERN,[data-theme=dark] .vd.CANT_VERIFY{background:var(--sb);color:var(--sl);border-color:var(--sl)}
+.vd .k{font:600 14px var(--fm);letter-spacing:.12em;text-transform:uppercase;opacity:.95}
+.vd .w{font-family:var(--fh);font-size:40px;line-height:1.2;margin:4px 0 8px;animation:pop .5s .1s both}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.vd .ask{font-size:19px;line-height:1.55;font-weight:600}
+.vd .cr{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;align-items:center}
+.vd .cp{display:inline-block;background:#fff;color:#0E1830;font:500 17px var(--fm);padding:4px 12px;border-radius:8px;border:2px solid #0E1830;word-break:break-all}
+.band{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
+.band i{height:14px;border-radius:3px;border:2px solid currentColor;opacity:.5;display:block}
+.band i.on{opacity:1;background:currentColor;animation:seg .4s .2s both}
+.band i.cv{border-style:dashed}
+@keyframes seg{from{transform:scaleY(.2)}to{transform:none}}
+.band+.bl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:12.5px;line-height:1.25;margin-top:4px;text-align:center}
+.vd .nt{font-size:15px;margin-top:10px;line-height:1.5}
+.vd .bt{margin-top:12px}.vd .bt.gh{color:inherit;border-color:currentColor}
+.wave{display:inline-flex;gap:3px;align-items:center;height:24px}.wave b{width:4px;height:100%;background:currentColor;border-radius:2px;transform:scaleY(.25);animation:wv .9s ease-in-out infinite;transform-origin:center}
+.wave b:nth-child(2n){animation-delay:.15s}.wave b:nth-child(3n){animation-delay:.3s}.wave b:nth-child(5n){animation-delay:.45s}
+@keyframes wv{50%{transform:scaleY(1)}}
+.lay{display:flex;flex-direction:column;gap:20px;position:relative}
+.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible}
+.wires path{fill:none;stroke:var(--neel);stroke-width:2;stroke-dasharray:2 5;stroke-linecap:round;opacity:.8;animation:fd .5s both}
+[data-theme=dark] .wires path{stroke:var(--hal)}.wires path.hot{stroke:var(--kum);stroke-dasharray:none;stroke-width:3}
+.wires circle{fill:var(--neel)}[data-theme=dark] .wires circle{fill:var(--hal)}
+@keyframes fd{from{opacity:0}}
+.bub{background:var(--sf);border:2px solid var(--ln);border-radius:4px 20px 20px 20px;padding:14px 16px;font-size:18px;line-height:2.15;white-space:pre-wrap;word-break:break-word;position:relative}
+.bub .who{display:block;font:600 14px/1.3 var(--fm);color:var(--mu);margin-bottom:2px;white-space:normal}
+.msgs{display:grid;gap:10px}.msgs .bub{padding:10px 14px;line-height:2.05}
+.mk{background:none;border:0;padding:6px 3px;margin:-6px -1px;font:inherit;color:inherit;cursor:pointer;white-space:normal;text-align:inherit;display:inline;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mk.payee{font-family:var(--fm);font-size:.88em;border:2px solid var(--kum);border-radius:999px;background:var(--kb);color:var(--kt);padding:2px 10px;margin:0 2px}
+.mk.amount{font-family:var(--fm);font-size:.9em;border:2px solid var(--ht);border-radius:3px;background:var(--hb);color:var(--ht);padding:2px 8px;font-weight:600}
+.mk.deadline{text-decoration:underline wavy var(--kum) 2px;text-underline-offset:6px}
+.mk.secrecy{text-decoration:underline double var(--kum) 3px;text-underline-offset:6px}
+.mk.claim{background:linear-gradient(transparent 52%,var(--hal) 52%);border-bottom:2px dotted var(--ink)}
+[data-theme=dark] .mk.claim{background:linear-gradient(transparent 52%,#6B4F00 52%)}
+.mk.url{font-family:var(--fm);font-size:.88em;border:2px dashed var(--sl);background:var(--sb);color:var(--sl);padding:1px 6px;border-radius:6px}
+.mk.registration{font-family:var(--fm);font-size:.88em;border:2px dotted var(--mu);padding:1px 6px;background:repeating-linear-gradient(135deg,transparent 0 5px,var(--sb) 5px 8px)}
+.mk:hover,.mk.hot{outline:3px solid var(--fo);outline-offset:2px;border-radius:6px}
+.lgd{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:14px;line-height:1.4;color:var(--mu)}
+.lgd span{display:inline-flex;align-items:center;gap:4px}
+.cd{position:relative;background:var(--sf);border-radius:14px;padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;scroll-margin-top:16px}
+.cd.hot{box-shadow:0 0 0 4px var(--hal)}
+.cd.hard{border:4px solid var(--ink);border-radius:10px}
+.cd.easy{border:2px solid var(--ln);background:#FBF8EE;color:#0E1830;transform:rotate(-.5deg);border-radius:6px 6px 6px 22px;margin-right:6px}
+[data-theme=dark] .cd.easy{background:#1A2342;color:var(--ink)}
+.cd.easy::after{content:"";position:absolute;right:-1px;bottom:-1px;width:30px;height:30px;background:linear-gradient(135deg,var(--bg) 50%,#D8D2BE 50%);border-radius:14px 0 6px 0;box-shadow:-2px -2px 3px #0002}
+[data-theme=dark] .cd.easy::after{background:linear-gradient(135deg,var(--bg) 50%,#34426B 50%)}
+.cd .pl{display:flex;align-items:center;gap:8px;font:600 14px/1.3 var(--fm);letter-spacing:.04em}
+.cd.hard .pl{background:var(--ink);color:var(--bg);margin:-14px -16px 4px;padding:6px 16px;border-radius:5px 5px 0 0}
+.cd.easy .pl{color:var(--kt);text-transform:none;font-family:var(--fb);font-size:15px;border:2px dashed var(--kt);padding:2px 10px;border-radius:6px;align-self:flex-start}
+.tag{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-weight:700;font-size:15px;line-height:1.3;padding:3px 12px;border-radius:8px}
+.tag.VERIFIED{background:var(--pat);color:#fff;border:2px solid var(--pat)}[data-theme=dark] .tag.VERIFIED{background:var(--pb);color:var(--pat)}
+.tag.CONTRADICTED{background:var(--kb);color:var(--kt);border:4px solid var(--kt)}
+.tag.COULDNT_VERIFY{background:var(--sb);color:var(--sl);border:2px dashed var(--sl)}
+.tag.AI_INTERPRETATION{background:var(--ab);color:var(--ai);border:2px dotted var(--ai)}
+.tag .ai{background:var(--ai);color:var(--ab);font:700 12px var(--fm);padding:0 6px;border-radius:4px}
+.cd h3{font-size:19px;line-height:1.45}
+.cd p{margin:0;font-size:17px;line-height:1.65}
+.cd .st{font-size:16px;background:var(--sb);color:var(--sl);padding:8px 12px;border-radius:8px}
+.cd .st b{display:block;font-size:14px}
+.cd .src{font-size:14px;color:var(--mu);line-height:1.5}
+.cd .src em{font-style:normal;color:var(--ht);background:var(--hb);padding:0 6px;border-radius:4px}
+.cd.pulse{animation:pls 1s}@keyframes pls{40%{transform:scale(1.015)}}
+.ps{background:var(--sf);border:2px solid var(--ln);border-radius:18px;padding:14px;display:grid;gap:10px}
+.ln{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap}
+.ln .lb{flex-basis:100%;font:700 15px var(--fb);color:var(--mu)}
+.nd{flex:1 1 70px;min-height:56px;padding:6px 8px;border-radius:12px;font-size:15px;line-height:1.35;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:600;position:relative}
+.ln.ok .nd{background:var(--pb);color:var(--pat);border:2px solid var(--pat)}
+.ln.no .nd{background:var(--kb);color:var(--kt);border:2px solid var(--kt)}
+.nd.mo{font-weight:500}.ln .ar{align-self:center;color:var(--mu);flex:none}
+.brk{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--kb);color:var(--kt);border:3px solid var(--kt);border-radius:12px;font-weight:600;font-size:16px;line-height:1.5}
+.brk svg{margin-top:2px}
+.road{position:relative;display:grid;gap:0;padding-left:56px}
+.road::before{content:"";position:absolute;left:14px;top:12px;bottom:12px;width:28px;background:var(--neel);border-radius:14px;background-image:repeating-linear-gradient(var(--hal) 0 10px,transparent 10px 22px);background-size:4px 100%;background-repeat:no-repeat;background-position:center}
+.stop{position:relative;min-height:56px;padding:6px 0 14px}
+.stop::before{content:attr(data-n);position:absolute;left:-54px;top:4px;width:32px;height:32px;border-radius:50%;background:var(--sf);border:3px solid var(--neel);font:700 15px/26px var(--fm);text-align:center;color:var(--ink);z-index:1;margin-left:0}
+.stop.cur::before{background:var(--kum);border-color:var(--hal);color:#fff}
+.stop.cur::after{content:"";position:absolute;left:-58px;top:0;width:40px;height:40px;border-radius:50%;border:3px solid var(--kum);animation:pu 1.6s ease-out infinite}
+@keyframes pu{from{transform:scale(.8);opacity:1}to{transform:scale(1.7);opacity:0}}
+.stop b{display:block;font-size:17px;line-height:1.4}
+.stop:not(.cur):not(.has) b{color:var(--mu);font-weight:600}
+.stop .bc{font-size:15px;line-height:1.5;margin-top:4px;color:var(--mu)}
+.stop.cur .bc{color:var(--ink)}
+.dock{margin-top:6px;padding:6px 12px;border-radius:4px 12px 12px 12px;background:var(--sf);border:2px solid var(--ln);font-size:15px;line-height:1.5}
+.dock.pay{border-color:var(--kt)}.dock i{font:600 12px var(--fm);color:var(--mu);display:block;font-style:normal}
+.trip{margin:10px 0 4px -50px;padding:4px 12px 4px 50px;background:repeating-linear-gradient(135deg,var(--kum) 0 10px,#7E0E08 10px 20px);color:#fff;font-weight:700;font-size:15px;line-height:1.4;border-radius:0 8px 8px 0}
+[data-theme=dark] .trip{color:#fff}
+.nx{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:n}
+.nx li{display:flex;gap:12px;align-items:flex-start;min-height:48px;padding:10px 14px;background:var(--sf);border:2px solid var(--ln);border-radius:14px;font-weight:600;line-height:1.5;counter-increment:n}
+.nx li::before{content:counter(n);flex:none;width:30px;height:30px;border-radius:50%;background:var(--neel);color:#fff;display:grid;place-items:center;font:600 15px var(--fm)}
+[data-theme=dark] .nx li::before{background:var(--hal);color:#12204A}
+.rc{font-family:var(--fm);font-size:15px;line-height:1.55;background:#FFFEF9;color:#12182B;padding:18px 16px 26px;margin:0 8px;position:relative;animation:pr 1s steps(14) both;transform-origin:top;border-radius:2px;filter:drop-shadow(0 2px 3px #0003)}
+@keyframes pr{from{transform:translateY(-70px);opacity:0}to{transform:none;opacity:1}}
+.rc::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:10px;background:linear-gradient(135deg,#FFFEF9 50%,transparent 50%) 0 0/14px 10px,linear-gradient(225deg,#FFFEF9 50%,transparent 50%) 0 0/14px 10px}
+.rc h3{font:600 15px var(--fm);text-align:center;letter-spacing:.16em;text-transform:uppercase}
+.rc hr{border:0;border-top:2px dashed #12182B;margin:10px 0}
+.rc dl{margin:0;display:grid;gap:8px}.rc dt{font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#4A5573}.rc dd{margin:0 0 0 12px;word-break:break-word}
+.sheetbg{position:fixed;inset:0;background:#0A102288;z-index:50;display:flex;align-items:flex-end;justify-content:center;animation:fd .2s}
+.sheet{background:var(--bg);width:min(560px,100%);max-height:86vh;overflow:auto;border-radius:22px 22px 0 0;padding:10px 16px 24px;animation:up .3s both;border:2px solid var(--ln)}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.sheet .gr{width:48px;height:5px;border-radius:3px;background:var(--ln);margin:0 auto 12px}
+.sheet>*+*{margin-top:14px}
+.sticky{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(390px,100%);z-index:20;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:var(--neel);border-top:4px solid var(--hal)}
+body.dk .sticky{width:min(1280px,100%);padding:10px 24px;gap:16px}
+.sticky .bt{flex-direction:column;gap:2px;padding:6px 4px;font-size:14px;min-height:56px;border-radius:12px;text-align:center;background:transparent;color:#fff;border-color:#8C9ACB}
+.sticky .bt.hl{background:var(--hal);color:#12204A;border-color:var(--hal)}
+@container (min-width:560px){.sticky .bt{flex-direction:row;font-size:17px;gap:10px}}
+.bn{margin:0;padding:10px 16px;font-weight:600;font-size:16px;line-height:1.5;display:flex;gap:10px;align-items:flex-start}
+.bn.off{background:var(--hb);color:var(--ht);border-bottom:3px solid var(--ht)}
+.bn.er{background:var(--kb);color:var(--kt);border-bottom:3px solid var(--kt)}
+.emp{text-align:center;padding:28px 12px;border:3px dashed var(--ln);border-radius:18px}
+.emp svg{width:56px;height:56px;color:var(--mu)}
+.bb{background:var(--sf);border:2px solid var(--ln);border-radius:16px;padding:14px 16px;font-size:18px;line-height:1.7;white-space:pre-wrap}
+.cmp{display:grid;gap:10px}
+.rail{display:flex;gap:0;position:relative;margin:4px 0}
+.rail::before{content:"";position:absolute;left:8%;right:8%;top:23px;height:6px;background:var(--neel);border-radius:3px}
+.rl{flex:1;text-align:center;position:relative}
+.rl b{display:inline-block;min-width:76px;padding:6px 10px;border-radius:999px;font:600 15px var(--fm);background:var(--kum);color:#fff;border:3px solid var(--hal)}
+[data-theme=dark] .rl b{background:var(--kb);color:var(--kt);border-color:var(--kt)}
+.rl:nth-child(2) b{background:var(--hal);color:#12204A;border-color:var(--neel)}.rl:nth-child(3) b{background:var(--sb);color:var(--sl);border-color:var(--sl)}
+.rl span{display:block;font-size:14px;line-height:1.35;margin-top:6px;padding:0 4px}
+.big{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:96px;border-radius:22px;background:var(--hal);color:#12204A;font-family:var(--fh);font-size:56px;line-height:1.1;text-decoration:none;border:4px solid #12204A;padding:8px}
+.big small{font:700 17px var(--fb)}
+.fl{display:grid;gap:4px}.fl label{font-weight:700;font-size:15px}.fl input,.fl textarea{width:100%;min-height:48px;padding:8px 12px;border-radius:10px;border:2px solid var(--ln);background:var(--sf);font-size:17px}
+.cmpz{background:var(--sf);border:2px solid var(--ln);border-radius:18px;padding:12px;display:grid;gap:12px}
+.cmpz .bub{background:#DDF3E8;color:#0E1830;border-color:#9ACDB5;border-radius:16px 16px 4px 16px;line-height:1.7;margin-left:18px}
+[data-theme=dark] .cmpz .bub{background:#12342B;color:var(--ink);border-color:#1E5A4A}
+.pt{position:fixed;top:8px;right:8px;z-index:60;font-size:15px}
+.pt>button{min-height:48px;min-width:48px;border-radius:24px;background:#0E1830;color:#fff;border:2px solid #F4B400;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0 14px;font-weight:700}
+.pt .pn{display:none;position:absolute;right:0;top:56px;width:min(300px,calc(100vw - 16px));background:#0E1830;color:#E8ECF8;padding:12px;border-radius:14px;border:2px solid #F4B400;gap:10px}
+.pt.o .pn{display:grid}
+.pt .rw{display:grid;gap:4px}.pt .rw>span{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#C9D3EE}
+.pt .sg{display:flex;flex-wrap:wrap;gap:4px}
+.pt .sg button{min-height:44px;padding:4px 10px;border-radius:8px;border:2px solid #5C6B99;background:transparent;color:#E8ECF8;cursor:pointer;font-size:15px}
+.pt .sg button[aria-pressed=true]{background:#F4B400;color:#12204A;border-color:#F4B400;font-weight:700}
+.sr{position:absolute;left:-9999px}
+@container (min-width:900px){
+ .pg{padding:16px 40px 32px}.hero{padding:16px 40px 40px}
+ .ins{grid-template-columns:repeat(3,1fr)}.ex{grid-template-columns:repeat(2,1fr)}.sit{grid-template-columns:repeat(2,1fr)}
+ .hm{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.hm .hl2{order:0}
+ .lay{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:start}
+ h1{font-size:46px}.vd .w{font-size:52px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.lay>div{display:contents}.lay,.res{position:relative}
+.o1{order:1}.o2{order:2}.o3{order:3}.o4{order:4}.o5{order:5}.o6{order:6}
+.hd2{display:none}.lgd .mk{cursor:default}.lgd .mk:hover{outline:0}
+.nx li div{flex:1;font-weight:700}.tm{font:600 13px var(--fm);color:var(--mu);letter-spacing:.08em}
+.lk{display:flex;width:100%;justify-content:space-between;align-items:center;gap:8px;background:none;border:0;padding:0;text-align:left;font-weight:700;font-size:inherit;cursor:pointer;min-height:36px;color:inherit}
+.lk2{color:inherit;text-decoration:underline;text-underline-offset:4px;display:inline-block;min-height:32px;font-weight:700}
+@container (min-width:900px){.lay>div{display:flex;flex-direction:column;gap:20px}.hp{display:none}.hd2{display:inline}}
+.pt{top:8px;bottom:auto;right:8px}.hd{padding-right:68px}@container (max-width:380px){.wm small{display:none}}
+.pt>button{padding:0;justify-content:center;width:48px;border-radius:50%}
+.pt .pn{top:56px;bottom:auto}
+.ln{flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:2px}
+.ln .ar{align-self:center;transform:rotate(90deg);display:flex;align-items:center;height:24px}
+.nd{flex:none;width:100%}
+.nd .mo{font-size:14px}
+.rcw{overflow:hidden;padding:0 0 18px}
+.rc{animation:none}
+.rcw:not(.in) .rc{visibility:hidden}
+.rcw.in .rc{animation:pr 1s steps(14) both}
+@keyframes pr{from{transform:translateY(-105%)}to{transform:none}}
+@container (min-width:900px){.ln{flex-direction:row;flex-wrap:wrap;align-items:stretch;gap:6px}.ln .lb{flex:0 0 100%}.ln .ar{transform:none;height:auto}.nd{flex:1 1 0;width:auto}.nd.m2{flex:2 1 0}}
+.ck li{opacity:1;color:var(--mu)}.ck li.on{color:var(--ink)}
+.nx li{padding:0 14px;align-items:center}.nx li>span,.nx li>div{padding:10px 0}.lk{min-height:48px}.lk2{padding:8px 0;min-height:0}
+</style></head><body class="ph"><div id="app"></div>
+<script type="application/json" id="data">{"fx":{"kavita":{"schema_version":1,"mode":"rules_only","header":"HIGH_CONCERN","action_requested":{"text_en":"Send ₹20,000 to a personal-style UPI ID for IPO allotment, today; keep it secret.","text_hi":"₹20,000 किसी के निजी UPI पर (IPO अलॉटमेंट के लिए) भेजें, आज ही; किसी को न बताएँ।","amount":20000,"deadline":true,"secrecy":true},"items":[{"id":"p1_ipo_upi","card":"P1_IPO_UPI","label":"CONTRADICTED","forgeability":"hard","title_hi":"IPO अलॉटमेंट के लिए किसी और को पैसे भेजने को कहा गया है","title_en":"Asked to pay someone else for IPO allotment","why_hi":"सामान्य IPO आवेदन में आप अपनी ही UPI ID से बोली लगाते हैं और आपके अपने खाते में पैसे रोके जाते हैं। अलॉटमेंट के लिए किसी तीसरे व्यक्ति को पैसे भेजना SEBI की बताई सामान्य प्रक्रिया से मेल नहीं खाता।","why_en":"In a normal IPO application you bid from your own UPI ID and approve a mandate that blocks money in your own account. Paying a third party for allotment does not match the standard flow described by SEBI.","source":{"name":"SEBI: applying for IPOs through UPI","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Apply only from your own broker or bank app, with your own UPI ID.","settle_hi":"आवेदन सिर्फ़ अपने ब्रोकर या बैंक के ऐप से, अपनी ही UPI ID से करें।"},{"id":"p3_sebi_named_claims","card":"P3_SEBI_NAMED_CLAIMS","label":"CONTRADICTED","forgeability":"hard","title_hi":"ऑफ़र उन दावों जैसा है जिन्हें SEBI ने चेतावनी के संकेत बताया है","title_en":"Offer matches claims SEBI has named as warning signs","why_hi":"SEBI की एडवाइज़री में पक्का IPO अलॉटमेंट, इंस्टीट्यूशनल ट्रेडिंग खाता, सस्ता IPO/ब्लॉक डील और एंकर एक्सेस को चेतावनी के संकेत बताया गया है। यह संदेश उन संकेतों से मेल खाता है।","why_en":"SEBI's advisory names guaranteed IPO allotment, institutional trading accounts, discounted IPO/block deals and anchor access as warning signs. This message matches those signals.","source":{"name":"SEBI advisory, Aug 2025 (IPO allotment claims)","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"No registered broker can guarantee allotment. Ask your own broker.","settle_hi":"कोई रजिस्टर्ड ब्रोकर अलॉटमेंट की गारंटी नहीं दे सकता। अपने ब्रोकर से पूछें।"},{"id":"p2_payee_unverified","card":"P2_BROKER_PAYMENT","label":"COULDNT_VERIFY","forgeability":"hard","title_hi":"जिसे पैसे भेजने को कहा गया है, उसकी जाँच नहीं हो सकी","title_en":"Payment destination could not be verified","why_hi":"यह पेमेंट ID उस वैलिडेटेड पैटर्न जैसी नहीं है जो SEBI ने रजिस्टर्ड ब्रोकर और फंड के लिए बताया है। यह एक अतिरिक्त जाँच है, नियम नहीं, इसलिए सिर्फ़ इससे कुछ साबित नहीं होता।","why_en":"This payment ID does not follow the validated-handle pattern SEBI describes for registered brokers and funds. Validated handles are an extra check, not a rule, so this alone proves nothing.","source":{"name":"SEBI Check / validated UPI handles","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Search this ID on SEBI Check before paying. If it is not listed, do not pay.","settle_hi":"पैसे भेजने से पहले इस ID को SEBI Check पर खोजें। सूची में न मिले तो पैसे न भेजें।"},{"id":"p6_identity_channel","card":"P6_IDENTITY_VS_CHANNEL","label":"COULDNT_VERIFY","forgeability":"hard","title_hi":"पेमेंट, लिंक या संपर्क उस कंपनी से जुड़ा नहीं दिखता जिसका नाम लिया गया","title_en":"Payment, link or contact is not tied to the firm named","why_hi":"संदेश किसी रजिस्टर्ड कंपनी का नाम लेता है, पर ऐसा कुछ नहीं दिखता कि दी गई पेमेंट ID, लिंक या नंबर उसी कंपनी का है।","why_en":"The message names a registered firm, but nothing shows that the payment ID, link or number it gives belongs to that firm.","source":{"name":"SEBI: intermediary search","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Check the firm's contact on SEBI's intermediary page. Do not use numbers from the chat.","settle_hi":"SEBI के इंटरमीडियरी पेज पर कंपनी का संपर्क जाँचें। चैट वाले नंबर का इस्तेमाल न करें।"},{"id":"p6_reg_easy","card":"P6_IDENTITY_VS_CHANNEL","label":"COULDNT_VERIFY","forgeability":"easy","title_hi":"SEBI रजिस्ट्रेशन नंबर बताया गया है","title_en":"A SEBI registration number is quoted","why_hi":"असली रजिस्ट्रेशन नंबर कोई भी कॉपी कर सकता है। नंबर सही हो तब भी इतना ही पता चलता है कि कंपनी है, यह नहीं कि भेजने वाला वही कंपनी है। हम इसे अच्छा संकेत नहीं मानते।","why_en":"Anyone can copy a real registration number. Even if the number exists, it only shows that a firm exists, not that this sender is that firm. We do not count it as a good sign.","source":{"name":"SEBI: intermediary search","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Find the firm on SEBI's intermediary page and use the contact details listed there, not numbers from the chat.","settle_hi":"SEBI के इंटरमीडियरी पेज पर कंपनी खोजें और वहाँ दिए संपर्क का इस्तेमाल करें, चैट के नंबर का नहीं।"}],"stage":{"index":4,"name":"DEPOSIT_PUSH","name_hi":"पैसे जमा करवाना","name_en":"Deposit push","because_en":"This looks like the \"deposit push\" stage because it asks you to send money.","because_hi":"यह \"पैसे जमा करवाना\" वाले चरण जैसा लगता है क्योंकि पैसे भेजने को कहा गया है।"},"next_steps":["stop_payment","verify_payee_sebi_check","ask_trusted_person"],"payee":{"value":"rajeshipo.8800112233@okaxis","type":"personal_style","kind":"upi"},"situation":"PREVENTION","privacy":{"on_device":["redaction","extraction","rules"],"sent":[],"to":"nobody (rules ran on this device)","stored":"none"},"highlights":[{"start":40,"end":67,"kind":"claim","item_id":"p6_identity_channel"},{"start":100,"end":112,"kind":"registration","item_id":"p6_reg_easy"},{"start":117,"end":135,"kind":"claim","item_id":"p3_sebi_named_claims"},{"start":165,"end":188,"kind":"claim","item_id":"p3_sebi_named_claims"},{"start":190,"end":205,"kind":"deadline"},{"start":206,"end":213,"kind":"amount","item_id":"p1_ipo_upi"},{"start":233,"end":260,"kind":"payee","item_id":"p2_payee_unverified"},{"start":268,"end":283,"kind":"secrecy"}]},"praveen":{"schema_version":1,"mode":"rules_only","header":"HIGH_CONCERN","action_requested":{"text_en":"Send ₹9,876 to a personal-style UPI ID.","text_hi":"₹9,876 किसी के निजी UPI पर भेजें।","amount":9876,"deadline":false,"secrecy":false},"items":[{"id":"p4_withdrawal_fee","card":"P4_WITHDRAWAL_FEE","label":"CONTRADICTED","forgeability":"hard","title_hi":"अपना ही पैसा निकालने के लिए फ़ीस या टैक्स माँगा गया है","title_en":"Asked to pay a fee or tax to take out your own money","why_hi":"असली प्लेटफ़ॉर्म आपका अपना पैसा निकालने के लिए नया पैसा जमा नहीं करवाते। यह उस चरण से मेल खाता है जो SEBI ने नकली ट्रेडिंग ऐप के लिए बताया है।","why_en":"Genuine platforms do not need a new deposit to release your own funds. This matches the withdrawal-blocked stage SEBI describes for fake trading apps.","source":{"name":"SEBI: fake trading apps guidance","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Do not pay. Ask your bank and call 1930 if money has already moved.","settle_hi":"पैसे न भेजें। पैसे जा चुके हों तो बैंक को बताएँ और 1930 पर कॉल करें।"},{"id":"p7_apk","card":"P7_APK","label":"CONTRADICTED","forgeability":"hard","title_hi":"ऐप APK फ़ाइल के रूप में या ऐप स्टोर के बाहर भेजा गया है","title_en":"App shared as an APK file or outside an app store","why_hi":"असली ब्रोकर ऐप आधिकारिक ऐप स्टोर या कंपनी के अपने जाँचे हुए पेज से आते हैं। चैट में आया APK लिंक इससे मेल नहीं खाता।","why_en":"Genuine broker apps come from official app stores or the firm's own verified page. An APK link from a chat does not match that.","source":{"name":"SEBI: authorised trading apps list","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Check SEBI's list of authorised apps. Do not install from chat links.","settle_hi":"SEBI की अधिकृत ऐप सूची देखें। चैट के लिंक से कुछ इंस्टॉल न करें।"},{"id":"p2_payee_unverified","card":"P2_BROKER_PAYMENT","label":"COULDNT_VERIFY","forgeability":"hard","title_hi":"जिसे पैसे भेजने को कहा गया है, उसकी जाँच नहीं हो सकी","title_en":"Payment destination could not be verified","why_hi":"यह पेमेंट ID उस वैलिडेटेड पैटर्न जैसी नहीं है जो SEBI ने रजिस्टर्ड ब्रोकर और फंड के लिए बताया है। यह एक अतिरिक्त जाँच है, नियम नहीं, इसलिए सिर्फ़ इससे कुछ साबित नहीं होता।","why_en":"This payment ID does not follow the validated-handle pattern SEBI describes for registered brokers and funds. Validated handles are an extra check, not a rule, so this alone proves nothing.","source":{"name":"SEBI Check / validated UPI handles","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Search this ID on SEBI Check before paying. If it is not listed, do not pay.","settle_hi":"पैसे भेजने से पहले इस ID को SEBI Check पर खोजें। सूची में न मिले तो पैसे न भेजें।"},{"id":"p6_url_flags","card":"P6_IDENTITY_VS_CHANNEL","label":"COULDNT_VERIFY","forgeability":"hard","title_hi":"एक लिंक सामान्य नहीं दिखता","title_en":"A link looks unusual","why_hi":"लिंक अपनी असली जगह छिपाता है, सुरक्षा वाला (https) नहीं है, या उसका पता किसी जाने-माने ब्रोकर के नाम जैसा है पर अलग पता है।","why_en":"The link hides its destination, is not secure (no https), or its web address resembles a known broker's name but is a different address.","source":{"name":"SEBI: investor caution on links","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Do not open it from the chat. Type the firm's official address yourself.","settle_hi":"चैट से लिंक न खोलें। कंपनी का आधिकारिक पता ख़ुद टाइप करें।"},{"id":"p7_fake_env","card":"P7_FAKE_ENVIRONMENT","label":"COULDNT_VERIFY","forgeability":"easy","title_hi":"चैट में मुनाफ़े की स्क्रीन, बैलेंस या तारीफ़ें हैं","title_en":"Profit screens, balances or testimonials inside the chat","why_hi":"चैट या अनजान ऐप में दिखाए गए स्क्रीनशॉट, बैलेंस और तारीफ़ें बनाई जा सकती हैं। ये असली मुनाफ़े का सबूत नहीं हैं।","why_en":"Screenshots, balances and testimonials shown in a chat or an unknown app can be made up. They are not evidence of real returns.","source":{"name":"SEBI: fake trading apps guidance","url":"https://www.sebi.gov.in","date":"","verified":false},"settle_en":"Real returns show up in your own bank or broker statement, not in screenshots.","settle_hi":"असली मुनाफ़ा आपके अपने बैंक या ब्रोकर के स्टेटमेंट में दिखता है, स्क्रीनशॉट में नहीं।"}],"stage":{"index":5,"name":"WITHDRAWAL_BLOCKED","name_hi":"निकासी रोकना","name_en":"Withdrawal blocked or fee","because_en":"This looks like the \"withdrawal blocked or fee\" stage because it asks for a fee or tax to take money out.","because_hi":"यह \"निकासी रोकना\" वाले चरण जैसा लगता है क्योंकि पैसा निकालने के लिए फ़ीस या टैक्स माँगा गया है।","progression":[1,2,3,4,4,5]},"timeline":[{"sender":"Sender A","snippet":"Welcome to F&O Winners group. Join for daily free tips.","stage":1,"is_payment_ask":false,"is_transition":false},{"sender":"Sender A","snippet":"Today's call: Nifty buy 24500 CE, target 40 points.","stage":2,"is_payment_ask":false,"is_transition":false},{"sender":"Sender B","snippet":"Sir ne kal ka tip se profit hua, thank you!","stage":3,"is_payment_ask":false,"is_transition":false},{"sender":"Sender A","snippet":"Join our premium app for live tips, small deposit ₹500 to start. Download: http:","stage":4,"is_payment_ask":true,"is_transition":true},{"sender":"Sender C","snippet":"bhai maine ₹500 daala, profit dikh raha hai","stage":4,"is_payment_ask":true,"is_transition":false},{"sender":"Sender A","snippet":"Your account shows profit ₹1.75L. Withdrawal ready, pay ₹5,000 tax to withdraw. ","stage":5,"is_payment_ask":true,"is_transition":false}],"next_steps":["stop_paying","dont_pay_withdrawal_fee","call_1930","already_paid_flow"],"payee":{"value":"fnowinners9876@ybl","type":"personal_style","kind":"upi"},"situation":"ONGOING","privacy":{"on_device":["redaction","extraction","rules"],"sent":[],"to":"nobody (rules ran on this device)","stored":"none"},"highlights":[{"start":138,"end":169,"kind":"claim","item_id":"p7_fake_env"},{"start":267,"end":293,"kind":"url","item_id":"p6_url_flags"},{"start":293,"end":301,"kind":"url","item_id":"p7_apk"},{"start":335,"end":355,"kind":"claim","item_id":"p7_fake_env"},{"start":366,"end":398,"kind":"claim","item_id":"p7_fake_env"},{"start":418,"end":444,"kind":"claim","item_id":"p4_withdrawal_fee"},{"start":452,"end":458,"kind":"amount","item_id":"p4_withdrawal_fee"},{"start":481,"end":499,"kind":"payee","item_id":"p2_payee_unverified"}]},"legit":{"schema_version":1,"mode":"rules_only","header":"LOW_CONCERN","action_requested":{"text_en":"No payment request found in what you shared","text_hi":"आपके भेजे संदेश में पैसे भेजने की कोई माँग नहीं मिली","amount":null,"deadline":false,"secrecy":false},"items":[],"stage":null,"next_steps":["stop_payment","ask_trusted_person"],"payee":null,"situation":"PREVENTION","privacy":{"on_device":["redaction","extraction","rules"],"sent":[],"to":"nobody (rules ran on this device)","stored":"none"}}},"raw":{"kavita":"नमस्ते कविता जी। मैं राजेश बोल रहा हूँ, राजेश कैपिटल ट्रेडिंग डेस्क से। हमारा SEBI रजिस्ट्रेशन नंबर INZ000123456 है।\nइंस्टीट्यूशनल कोटे से इस हफ़्ते के IPO में आपका अलॉटमेंट पक्का हो जाएगा।\nआज शाम 5 बजे तक ₹20,000 इस UPI पर भेज दें: rajeshipo.8800112233@okaxis\nयह बात किसी को न बताएँ, वरना कोटा रद्द हो जाएगा।","praveen":"Sender A: Welcome to F&O Winners group. Join for daily free tips.\nSender A: Today's call: Nifty buy 24500 CE, target 40 points.\nSender B: Sir ne kal ka tip se profit hua, thank you!\nSender A: Join our premium app for live tips, small deposit ₹500 to start. Download: http://fno-winners-live.in/app.apk\nSender C: bhai maine ₹500 daala, profit dikh raha hai\nSender A: Your account shows profit ₹1.75L. Withdrawal ready, pay ₹5,000 tax to withdraw. Total ₹9,876 with charges, send to fnowinners9876@ybl","legit":"आपका सितंबर 2026 का मासिक स्टेटमेंट तैयार है। इसे अपने बैंक ऐप में देखें। किसी भी बदलाव के लिए अपनी ब्रांच में पूछें।","edu":"SIP क्या है? SIP यानी हर महीने एक तय रक़म म्यूचुअल फंड में लगाना। इससे बाज़ार के उतार-चढ़ाव का असर बँट जाता है। निवेश से पहले फंड कंपनी के दस्तावेज़ ज़रूर पढ़ें।"}}</script>
+<script>
+const UI={hi:{
+ruko:"रुको",h1:"पैसे भेजने से पहले, रुको।",
+sub:"मैसेज यहाँ डालें। हम दिखाएँगे कि वह आपसे क्या करवाना चाहता है, और असली तरीक़ा क्या है।",
+speak:"बोलकर बताएँ",speakS:"माइक दबाकर मैसेज सुनाएँ",paste:"मैसेज चिपकाएँ",pasteS:"WhatsApp या Telegram से",shot:"स्क्रीनशॉट",soon:"जल्द आ रहा है",
+exT:"इन्हें आज़माएँ",ex1:"IPO का मैसेज",ex1s:"अलॉटमेंट के लिए पैसे माँगने वाला संदेश",ex2:"टेलीग्राम टिप ग्रुप",ex2s:"पूरी चैट, समय के साथ",ex3:"रोज़ का नोटिस",ex3s:"बैंक स्टेटमेंट की सूचना",ex4:"जानकारी वाली पोस्ट",ex4s:"SIP के बारे में सीधी बात",
+inT:"मैसेज यहाँ डालें",inH:"WhatsApp या Telegram का मैसेज, या पूरी चैट।",ph:"यहाँ चिपकाएँ…",next:"आगे",clear:"मिटाएँ",listening:"सुन रहे हैं…",back:"पीछे",
+sitT:"अभी आपकी हालत क्या है?",sitH:"एक चुनें। इससे आगे के क़दम बदलते हैं।",
+s_PREVENTION:"पैसे भेजने से पहले",s_PREVENTIONs:"अभी कुछ नहीं भेजा",s_ATTEMPTED:"किसी ने कोशिश की",s_ATTEMPTEDs:"मैंने पैसे नहीं दिए",s_PAID:"पैसे चले गए",s_PAIDs:"मैंने पैसे भेज दिए हैं",s_ONGOING:"और पैसे माँग रहे हैं",s_ONGOINGs:"पहले भेज चुका, अब फिर माँग",
+chkT:"ग़ौर से देख रहे हैं",chk1:"निजी बातें इस फ़ोन पर ही हटाईं",chk2:"रक़म, पेमेंट ID और लिंक ढूँढे",chk3:"SEBI की बताई प्रक्रिया से मिलाया",
+band_HIGH_CONCERN:"ज़्यादा चिंता",band_MIXED_SIGNALS:"मिले-जुले संकेत",band_LOW_CONCERN:"कम चिंता",band_CANT_VERIFY:"जाँच नहीं हो सकी",
+bl_LOW_CONCERN:"कम",bl_MIXED_SIGNALS:"मिले-जुले",bl_HIGH_CONCERN:"ज़्यादा",bl_CANT_VERIFY:"जाँच नहीं",
+kick:"आपके संदेश के बारे में",ask:"यह संदेश आपसे कहता है",
+nt_HIGH_CONCERN:"यह संदेश इन संकेतों से मेल खाता है। फ़ैसला आपका है, पर भेजने से पहले नीचे के सबूत देखें।",
+nt_MIXED_SIGNALS:"कुछ बातें मेल खाती हैं, कुछ नहीं। भेजने से पहले नीचे देखें।",
+nt_LOW_CONCERN:"आपके भेजे संदेश में पैसे की माँग नहीं मिली। यह किसी बात की मंज़ूरी नहीं है। कोई पैसे माँगे तो फिर से जाँचें।",
+nt_CANT_VERIFY:"हम इस संदेश को जाँच नहीं सके। कुछ भी भेजने से पहले किसी अपने से पूछें।",
+suna:"सुना दो",ruk:"रोकें",
+xrT:"आपका संदेश, ग़ौर से",xrHp:"निशान पर दबाएँ, उसका सबूत खुलेगा।",xrHd:"हर निशान से एक रेखा उसके सबूत तक जाती है।",
+mk_payee:"पेमेंट ID",mk_amount:"रक़म",mk_deadline:"जल्दी",mk_secrecy:"छिपाना",mk_claim:"दावा",mk_url:"लिंक",mk_registration:"रजिस्ट्रेशन नंबर",
+mkx_deadline:"जल्दी करवाने वाले शब्द आपको सोचने का समय नहीं देते।",mkx_secrecy:"किसी को न बताने को कहा गया है। इसीलिए किसी भरोसेमंद से पूछना ज़रूरी है।",mkx_none:"इस निशान का अलग सबूत कार्ड नहीं है।",
+splT:"असली तरीक़ा और इस संदेश की माँग",splReal_p1_ipo_upi:"असली IPO आवेदन ऐसे होता है",splReal_p4_withdrawal_fee:"अपना पैसा निकालना ऐसे होता है",splAsk:"यह संदेश क्या माँगता है",
+you:"आप",
+sp1_a:"आपकी अपनी UPI ID से मैंडेट मंज़ूर",sp1_b:"पैसे आपके ही खाते में रुके रहते हैं",sp1_c:"अलॉटमेंट",sp1_d:"तीसरा व्यक्ति",
+sp4_a:"आप अपना ही पैसा निकालना चाहते हैं",sp4_b:"आपका अपना पैसा आपको मिलता है",sp4_d:"नया पैसा जमा",
+breakT:"यहाँ रास्ते अलग हो जाते हैं",
+ledT:"सबूत की बही",ledH:"हर बात के साथ लिखा है कि उसे बनाना कितना आसान है।",
+lab_VERIFIED:"जाँचा हुआ",lab_CONTRADICTED:"मेल नहीं खाता",lab_COULDNT_VERIFY:"जाँच नहीं हो सकी",lab_AI_INTERPRETATION:"AI की राय",
+aiNote:"AI की राय, सबूत नहीं",
+fg_hard:"नक़ल करना मुश्किल",fg_easy:"कोई भी इसकी नक़ल कर सकता है",
+settle:"इससे कैसे पता चलेगा",srcL:"स्रोत",srcPend:"स्रोत की जाँच बाकी",aiRe:"AI ने शब्द बदले हैं",
+lgT:"निशानों का मतलब",lgHard:"ठोस तख़्ती: नक़ल करना मुश्किल",lgEasy:"उधड़ा स्टिकर: कोई भी नक़ल कर सकता है",
+roadT:"पैसे माँगने का रास्ता",roadH:"यह संदेश इस रास्ते के किस पड़ाव जैसा लगता है।",
+stop1:"पहला न्योता",stop2:"भरोसा जमाना",stop3:"नक़ली सबूत या ऐप",stop4:"पैसे जमा करवाना",stop5:"निकासी रोकना या फ़ीस",
+here:"यहाँ जैसा लगता है",trip:"यहीं से पैसे की माँग शुरू हुई",noStage:"इस संदेश में रास्ते का कोई पड़ाव नहीं दिखा।",
+nxT:"अब क्या करें",
+n_stop_payment:"पैसे अभी न भेजें",n_verify_payee_sebi_check:"पेमेंट ID को SEBI Check पर खोजें",n_ask_trusted_person:"किसी भरोसेमंद अपने से पूछें",n_dont_engage:"जवाब न दें, बातचीत न बढ़ाएँ",n_report_i4c_and_telecom:"cybercrime.gov.in और संचार साथी पर बताएँ",n_keep_screenshots:"स्क्रीनशॉट संभालकर रखें",n_already_paid_flow:"पैसे चले गए हैं तो पहला घंटा देखें",n_call_1930:"1930 पर कॉल करें",n_report_cybercrime:"cybercrime.gov.in पर शिकायत करें",n_tell_bank:"तुरंत अपने बैंक को बताएँ",n_report_scores:"SEBI SCORES पर शिकायत डालें",n_stop_paying:"और पैसे न भेजें",n_dont_pay_withdrawal_fee:"निकासी की फ़ीस या टैक्स न दें",
+prT:"प्राइवेसी रसीद",pr_on:"इस फ़ोन पर हुआ",pr_sent:"बाहर भेजा गया",pr_to:"किसे भेजा",pr_stored:"सहेजा गया",none:"कुछ नहीं",
+tok_redaction:"निजी बातें हटाना",tok_extraction:"रक़म, ID, लिंक निकालना",tok_rules:"नियमों से मिलान",
+to_local:"किसी को नहीं (नियम इसी फ़ोन पर चले)",
+trT:"किसी अपने से पूछें",trSub:"किसे भेजना है? इससे बस शुरुआत का शब्द बदलता है।",
+who_mummy:"मम्मी",who_beta:"बेटा",who_padosi:"पड़ोसी",who_dost:"दोस्त",
+gr_mummy:"नमस्ते मम्मी",gr_beta:"बेटा",gr_padosi:"नमस्ते पड़ोसी जी" /* REVIEW */,gr_dost:"भाई",
+tr_s_PREVENTION:"मुझे एक संदेश मिला है। मैंने अभी कुछ नहीं भेजा है।",tr_s_ATTEMPTED:"मुझे एक संदेश मिला है। मैंने कोई पैसा नहीं दिया है।",tr_s_PAID:"मैं एक संदेश के कहने पर पैसे भेज चुका हूँ। मुझे मदद चाहिए।" /* REVIEW */,tr_s_ONGOING:"पहले मैंने पैसे भेजे थे, अब और माँगे जा रहे हैं।",
+tr_ask:"इसमें कहा गया है:",tr_pay:"भेजने की जगह:",tr_find:"जाँच में ये बातें मिलीं:",tr_end:"भेजने से पहले एक बार देख लीजिए, क्या आपको ठीक लगता है?",
+copy:"कॉपी करें",copied:"कॉपी हो गया",send:"भेजें",
+paT:"पहला घंटा",paSub:"शांत रहें। नीचे के क़दम एक-एक करके करें।",paNo:"पैसे वापस मिलेंगे या नहीं, यह हम नहीं कह सकते। जल्दी बताने से बैंक के पास कदम उठाने का मौक़ा रहता है।",
+t_now:"अभी",t_15:"15 मिनट",t_60:"1 घंटा",
+pa_now:"1930 पर कॉल करें",pa_now_s:"राष्ट्रीय साइबर हेल्पलाइन। रक़म, पेमेंट ID और समय बताएँ।",
+pa_15:"अपने बैंक को बताएँ",pa_15_s:"बैंक के ऐप या हेल्पलाइन से। लेन-देन का समय और ID साथ रखें।",
+pa_60a:"cybercrime.gov.in पर शिकायत डालें",pa_60a_s:"नीचे की सारांश-पर्ची यहाँ काम आएगी।",pa_60b:"SEBI SCORES पर शिकायत डालें",pa_60b_s:"अगर पैसा निवेश के नाम पर माँगा गया था।",pa_60c:"स्क्रीनशॉट संभालकर रखें",pa_60c_s:"चैट, लिंक और पेमेंट की रसीद मिटाएँ नहीं।",
+call1930:"1930 पर कॉल करें",
+inc:"घटना का सारांश",incH:"बदल सकते हैं। फिर कॉपी करके शिकायत में चिपकाएँ।",
+f_date:"तारीख़",f_amount:"रक़म (₹)",f_payee:"पेमेंट ID",f_urls:"लिंक",f_claim:"उन्होंने क्या कहा",f_platform:"कहाँ आया",f_reg:"बताए गए रजिस्ट्रेशन नंबर",
+b_sebi:"SEBI पर जाँचें",b_trust:"किसी से पूछें",b_paid:"पैसे चले गए",
+sebiT:"SEBI Check पर कैसे खोजें",sebiB:"1. नीचे की ID कॉपी करें।\n2. SEBI Check खोलें और ID वहाँ डालें।\n3. सूची में न मिले तो पैसे न भेजें।",sebiNone:"इस संदेश में कोई पेमेंट ID नहीं मिली।",sebiOpen:"SEBI की साइट खोलें",
+emptyT:"अभी कुछ नहीं डाला",emptyB:"ऊपर मैसेज चिपकाएँ या बोलकर बताएँ।",errT:"जाँच पूरी नहीं हो सकी",errB:"आपका मैसेज इस फ़ोन से बाहर नहीं गया। फिर से कोशिश करें।",retry:"फिर कोशिश करें",
+offB:"इंटरनेट नहीं है। अभी सिर्फ़ नियमों से जाँच हो रही है (rules only)।",mode_rules_only:"सिर्फ़ नियमों से जाँच",mode_llm:"नियम और AI",
+close:"बंद करें",home:"घर",lang:"EN",
+pStop:"पैसे जा चुके हैं? पहला घंटा देखें",unk:"अनजान नंबर",noItems:"अलग से कोई बात चिह्नित नहीं हुई।"
+},en:{
+ruko:"Ruko",h1:"Pause before you send money.",
+sub:"Put the message here. We show what it wants you to do, and how the real process works.",
+speak:"Speak it",speakS:"Press the mic and read the message out",paste:"Paste a message",pasteS:"From WhatsApp or Telegram",shot:"Screenshot",soon:"Coming soon",
+exT:"Try these",ex1:"An IPO message",ex1s:"Asks for money for an allotment",ex2:"A Telegram tip group",ex2s:"A whole chat, over time",ex3:"A routine notice",ex3s:"A bank statement alert",ex4:"An education post",ex4s:"Plain facts about SIPs",
+inT:"Put the message here",inH:"A WhatsApp or Telegram message, or a whole chat.",ph:"Paste here…",next:"Next",clear:"Clear",listening:"Listening…",back:"Back",
+sitT:"Where are you right now?",sitH:"Pick one. It changes the next steps.",
+s_PREVENTION:"About to pay",s_PREVENTIONs:"Nothing sent yet",s_ATTEMPTED:"Someone tried",s_ATTEMPTEDs:"I did not pay",s_PAID:"Money has gone",s_PAIDs:"I have already sent it",s_ONGOING:"They want more money",s_ONGOINGs:"I paid before, now they ask again",
+chkT:"Looking closely",chk1:"Private details removed on this phone",chk2:"Amount, payment ID and links found",chk3:"Compared with the process SEBI describes",
+band_HIGH_CONCERN:"High concern",band_MIXED_SIGNALS:"Mixed signals",band_LOW_CONCERN:"Low concern",band_CANT_VERIFY:"Can't verify",
+bl_LOW_CONCERN:"Low",bl_MIXED_SIGNALS:"Mixed",bl_HIGH_CONCERN:"High",bl_CANT_VERIFY:"Can't verify",
+kick:"About your message",ask:"This message asks you to",
+nt_HIGH_CONCERN:"This message matches these signals. The decision is yours, but read the evidence below before you send anything.",
+nt_MIXED_SIGNALS:"Some things match, some do not. Read below before you send.",
+nt_LOW_CONCERN:"We found no payment request in what you shared. This is not an approval of anything. If someone asks for money later, check again.",
+nt_CANT_VERIFY:"We could not check this message. Ask someone you trust before sending anything.",
+suna:"Listen",ruk:"Stop",
+xrT:"Your message, up close",xrHp:"Tap a mark to open its evidence.",xrHd:"A line runs from each mark to its evidence.",
+mk_payee:"Payment ID",mk_amount:"Amount",mk_deadline:"Hurry",mk_secrecy:"Secrecy",mk_claim:"Claim",mk_url:"Link",mk_registration:"Registration no.",
+mkx_deadline:"Words that rush you leave no time to think.",mkx_secrecy:"You are asked to tell no one. That is exactly when to ask someone you trust.",mkx_none:"This mark has no separate evidence card.",
+splT:"The real process and what this message asks",splReal_p1_ipo_upi:"How a real IPO application works",splReal_p4_withdrawal_fee:"How taking out your own money works",splAsk:"What this message asks",
+you:"You",
+sp1_a:"Your own UPI ID approves a mandate",sp1_b:"Money stays blocked in your own account",sp1_c:"Allotment",sp1_d:"A third party",
+sp4_a:"You ask to take out your own funds",sp4_b:"Your own funds are released to you",sp4_d:"A new deposit",
+breakT:"The paths split here",
+ledT:"Evidence ledger",ledH:"Each finding says how easy it is to fake.",
+lab_VERIFIED:"Verified",lab_CONTRADICTED:"Contradicted",lab_COULDNT_VERIFY:"Couldn't verify",lab_AI_INTERPRETATION:"AI interpretation",
+aiNote:"AI's opinion, not proof",
+fg_hard:"Hard to fake",fg_easy:"Anyone can copy this",
+settle:"How to find out",srcL:"Source",srcPend:"Source check still open",aiRe:"Wording rephrased by AI",
+lgT:"What the marks mean",lgHard:"Solid plate: hard to fake",lgEasy:"Peeling sticker: anyone can copy it",
+roadT:"The road money is asked along",roadH:"Which stop on this road the message looks like.",
+stop1:"First invitation",stop2:"Building trust",stop3:"Fake proof or app",stop4:"Deposit push",stop5:"Withdrawal blocked or fee",
+here:"Looks like this",trip:"The ask for money starts here",noStage:"No stop on the road was seen in this message.",
+nxT:"What to do now",
+n_stop_payment:"Do not send money yet",n_verify_payee_sebi_check:"Search the payment ID on SEBI Check",n_ask_trusted_person:"Ask someone you trust",n_dont_engage:"Do not reply or keep talking",n_report_i4c_and_telecom:"Report on cybercrime.gov.in and Sanchar Saathi",n_keep_screenshots:"Keep the screenshots",n_already_paid_flow:"If money has gone, see the first hour",n_call_1930:"Call 1930",n_report_cybercrime:"File a report on cybercrime.gov.in",n_tell_bank:"Tell your bank right away",n_report_scores:"File on SEBI SCORES",n_stop_paying:"Do not send more money",n_dont_pay_withdrawal_fee:"Do not pay the withdrawal fee or tax",
+prT:"Privacy receipt",pr_on:"Done on this device",pr_sent:"Sent out",pr_to:"Sent to",pr_stored:"Stored",none:"Nothing",
+tok_redaction:"Removing private details",tok_extraction:"Finding amount, IDs, links",tok_rules:"Matching against rules",
+to_local:"",
+trT:"Ask someone you trust",trSub:"Who is it for? This only changes the greeting.",
+who_mummy:"Mummy",who_beta:"Beta",who_padosi:"Neighbour",who_dost:"Friend",
+gr_mummy:"Hello Mummy",gr_beta:"Beta",gr_padosi:"Hello, neighbour",gr_dost:"Hey",
+tr_s_PREVENTION:"I got a message. I have not sent anything yet.",tr_s_ATTEMPTED:"I got a message. I have not paid anything.",tr_s_PAID:"I sent money because of a message. I need help.",tr_s_ONGOING:"I sent money earlier and now they ask for more.",
+tr_ask:"It says:",tr_pay:"Pay to:",tr_find:"The check found:",tr_end:"Please take a look before I do anything. Does it seem right to you?",
+copy:"Copy",copied:"Copied",send:"Send",
+paT:"The first hour",paSub:"Stay calm. Do these one at a time.",paNo:"We cannot say whether money will come back. Telling your bank early gives it a chance to act.",
+t_now:"Now",t_15:"15 min",t_60:"1 hour",
+pa_now:"Call 1930",pa_now_s:"The national cyber helpline. Tell them the amount, payment ID and time.",
+pa_15:"Tell your bank",pa_15_s:"Use the bank app or helpline. Keep the transaction time and ID ready.",
+pa_60a:"File on cybercrime.gov.in",pa_60a_s:"The summary below will help here.",pa_60b:"File on SEBI SCORES",pa_60b_s:"If money was asked for in the name of investing.",pa_60c:"Keep the screenshots",pa_60c_s:"Do not delete the chat, links or payment receipt.",
+call1930:"Call 1930",
+inc:"Incident summary",incH:"You can edit it. Then copy it into your report.",
+f_date:"Date",f_amount:"Amount (₹)",f_payee:"Payment ID",f_urls:"Links",f_claim:"What they said",f_platform:"Where it came",f_reg:"Registration numbers quoted",
+b_sebi:"Check on SEBI",b_trust:"Ask someone",b_paid:"Money has gone",
+sebiT:"How to search on SEBI Check",sebiB:"1. Copy the ID below.\n2. Open SEBI Check and enter the ID.\n3. If it is not listed, do not pay.",sebiNone:"No payment ID was found in this message.",sebiOpen:"Open SEBI's site",
+emptyT:"Nothing put in yet",emptyB:"Paste a message above or speak it.",errT:"The check could not finish",errB:"Your message did not leave this phone. Please try again.",retry:"Try again",
+offB:"No internet. Checking with rules only for now.",mode_rules_only:"Rules-only check",mode_llm:"Rules and AI",
+close:"Close",home:"Home",lang:"हिं",
+pStop:"Money already gone? See the first hour",unk:"Unknown number",noItems:"Nothing was flagged separately."
+}};
+
+/* ===== data ===== */
+const D=JSON.parse(document.getElementById('data').textContent);
+function clone(o){return JSON.parse(JSON.stringify(o))}
+const CASES={
+ kavita:()=>({ledger:clone(D.fx.kavita),raw:D.raw.kavita}),
+ praveen:()=>({ledger:clone(D.fx.praveen),raw:D.raw.praveen}),
+ legit:()=>({ledger:clone(D.fx.legit),raw:D.raw.legit}),
+ edu:()=>({ledger:clone(D.fx.legit),raw:D.raw.edu}),
+ cant:()=>{const l=clone(D.fx.kavita);l.items=[];l.header='CANT_VERIFY';return{ledger:l,raw:D.raw.kavita}}
+};
+/* ===== helpers ===== */
+const $=(s,r)=>(r||document).querySelector(s),$$=(s,r)=>[...(r||document).querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const T=(k,l)=>(UI[l]&&UI[l][k])||UI.en[k]||k;
+const L2=(o,k,l)=>o[k+'_'+l]||o[k+'_en']||'';
+const inr=n=>'₹'+Number(n).toLocaleString('en-IN');
+const IC={mic:"M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM6 11a6 6 0 0 0 12 0M12 17v4",paste:"M9 4h6v3H9zM7 5.5H6a1 1 0 0 0-1 1V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6.5a1 1 0 0 0-1-1h-1M9 12h6M9 16h4",cam:"M4 8h3l2-3h6l2 3h3v11H4zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",check:"M5 12.5l4.5 4.5L19 7.5",cross:"M6 6l12 12M18 6L6 18",q:"M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17.5v.01",lock:"M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3",arr:"M5 12h14M13 6l6 6-6 6",back:"M19 12H5M11 6l-6 6 6 6",phone:"M6 3h3l2 5-2 1.5a11 11 0 0 0 5.5 5.5L16 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z",users:"M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M16 5.5a3 3 0 0 1 0 5.5M18 14.5a6 6 0 0 1 3 5.5",share:"M12 15V4M8 8l4-4 4 4M5 13v7h14v-7",copy:"M9 9h11v11H9zM5 15V4h11",spk:"M4 9v6h4l5 4V5L8 9zM16.5 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11",alert:"M12 4l9 16H3zM12 10v4M12 17v.01",flag:"M6 21V4M6 5h11l-2 4 2 4H6",gear:"M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1",ai:"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM18 16l.8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8z",srch:"M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM16 16l5 5",fork:"M12 21v-8M12 13L6 6M12 13l6-7M6 6V3M18 6V3",stop:"M7 7h10v10H7z"};
+const ic=n=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="${IC[n]}"/></svg>`;
+const markSvg=(s)=>`<svg width="${s}" height="${s}" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#12204A"/><path d="M6 32C14 19 23 14 32 14s18 5 26 18C50 45 41 50 32 50S14 45 6 32z" fill="#F4F6FA" stroke="#F4B400" stroke-width="3"/><circle cx="32" cy="32" r="13" fill="#12204A"/><rect x="26.5" y="25.5" width="4" height="13" rx="1" fill="#F4B400"/><rect x="33.5" y="25.5" width="4" height="13" rx="1" fill="#F4B400"/></svg>`;
+function eyeSvg(){return `<svg viewBox="0 0 300 200" class="eye" aria-hidden="true"><defs><clipPath id="al"><path d="M10 100C60 20 240 20 290 100C240 180 60 180 10 100z"/></clipPath><clipPath id="cr"><rect x="150" y="0" width="150" height="200"/></clipPath><clipPath id="cl"><rect x="0" y="0" width="150" height="200"/></clipPath></defs>
+<g clip-path="url(#al)"><rect width="300" height="200" fill="#F4F6FA"/><circle cx="150" cy="100" r="58" fill="#1B2D6B"/><circle cx="150" cy="100" r="50" fill="none" stroke="#3E4F85" stroke-width="7"/>
+<g clip-path="url(#cr)"><g class="rg r1"><path d="M150 150A50 50 0 0 1 150 50" fill="none" stroke="#F4B400" stroke-width="7"/></g></g>
+<g clip-path="url(#cl)"><g class="rg r2"><path d="M150 50A50 50 0 0 1 150 150" fill="none" stroke="#F4B400" stroke-width="7"/></g></g>
+<circle cx="150" cy="100" r="33" fill="#12204A"/><rect x="138" y="84" width="9" height="32" rx="2" fill="#F4B400"/><rect x="153" y="84" width="9" height="32" rx="2" fill="#F4B400"/><circle cx="150" cy="46" r="4" fill="#F4B400"/>
+<g class="lid"><rect width="300" height="100" fill="#12204A"/><path d="M0 100H300" stroke="#F4B400" stroke-width="3"/></g></g>
+<path d="M10 100C60 20 240 20 290 100C240 180 60 180 10 100z" fill="none" stroke="#F4B400" stroke-width="5" stroke-linejoin="round"/></svg>`}
+function lastSent(s){const p=String(s).split(/(?<=[.।])\s+/).filter(Boolean);return p[p.length-1]||s}
+/* highlights: sanitise, sort, drop overlaps, cap 12 */
+function hls(L,raw){const a=((L&&L.highlights)||[]).filter(h=>h&&h.start>=0&&h.end>h.start&&h.end<=raw.length).sort((x,y)=>x.start-y.start),o=[];let p=0;for(const h of a){if(h.start>=p&&o.length<12){o.push(h);p=h.end}}return o}
+function segs(text,base,list,l){let h='',p=0;list.forEach((m,i)=>{const s=m.start-base,e=m.end-base;if(s<p||e>text.length||s<0)return;const w=text.slice(s,e);h+=esc(text.slice(p,s))+`<button class="mk ${m.kind}" data-act="mk" data-i="${i}" data-item="${esc(m.item_id||'')}" aria-label="${esc(T('mk_'+m.kind,l))}: ${esc(w)}">${esc(w)}</button>`;p=e});return h+esc(text.slice(p))}
+function chatMsgs(raw){let o=0;return raw.split('\n').map((t,i)=>{const m=/^([^:\n]{1,24}): /.exec(t),x={i,start:o,sender:m?m[1]:'',off:m?m[0].length:0,t};o+=t.length+1;return x})}
+/* ===== components ===== */
+function cardHtml(it,l){
+ const hard=it.forgeability==='hard',ai=it.label==='AI_INTERPRETATION',ico={VERIFIED:'check',CONTRADICTED:'cross',COULDNT_VERIFY:'q',AI_INTERPRETATION:'ai'}[it.label];
+ return `<article class="cd ${hard?'hard':'easy'}" data-item="${esc(it.id)}" tabindex="-1"><div class="pl">${hard?ic('lock')+T('fg_hard',l):T('fg_easy',l)}</div>
+<span class="tag ${it.label}">${ic(ico)}${ai?'<span class="ai">AI</span>':''}${T('lab_'+it.label,l)}</span>
+<h3>${esc(L2(it,'title',l))}</h3><p>${esc(L2(it,'why',l))}</p>${ai?`<p class="mu"><b>${T('aiNote',l)}</b></p>`:''}${it.rephrased_by_ai?`<p class="src">${T('aiRe',l)}</p>`:''}
+${it.settle_en||it.settle_hi?`<div class="st"><b>${T('settle',l)}</b>${esc(L2(it,'settle',l))}</div>`:''}
+${it.source?`<div class="src">${T('srcL',l)}: ${esc(it.source.name)} ${it.source.verified?'':`<em>${T('srcPend',l)}</em>`}</div>`:''}</article>`}
+function vdHtml(L,l){
+ const a=L.action_requested,H=L.header,segsO=['LOW_CONCERN','MIXED_SIGNALS','HIGH_CONCERN','CANT_VERIFY'];
+ return `<section class="vd ${H}" id="vd" aria-live="polite"><div class="k">${T('kick',l)} · ${T('mode_'+L.mode,l)}</div><div class="w">${T('band_'+H,l)}</div>
+<div class="k">${T('ask',l)}</div><div class="ask" id="askbox">${esc(L2(a,'text',l))}</div>
+${(a.amount!=null||L.payee)?`<div class="cr">${a.amount!=null?`<span class="cp">${inr(a.amount)}</span>`:''}${a.amount!=null&&L.payee?ic('arr'):''}${L.payee?`<span class="cp">${esc(L.payee.value)}</span>`:''}</div>`:''}
+<div class="band" aria-hidden="true">${segsO.map(s=>`<i class="${s===H?'on':''} ${s==='CANT_VERIFY'?'cv':''}"></i>`).join('')}</div><div class="bl" aria-hidden="true">${segsO.map(s=>`<span>${T('bl_'+s,l)}</span>`).join('')}</div>
+<p class="nt">${T('nt_'+H,l)}</p><button class="bt gh" data-act="voice">${S.voice?`<span class="wave"><b></b><b></b><b></b><b></b><b></b></span>${T('ruk',l)}`:ic('spk')+T('suna',l)}</button></section>`}
+function xrayHtml(L,raw,l){
+ const list=hls(L,raw),chat=L.timeline&&raw.split('\n').length===L.timeline.length;let body;
+ if(chat){body=`<div class="msgs">${chatMsgs(raw).map(m=>{const e=m.start+m.off,sub=list.map((h,i)=>({h,i})).filter(x=>x.h.start>=e&&x.h.end<=m.start+m.t.length);
+  return `<div class="bub"><span class="who">${esc(m.sender)}</span>${segs(m.t.slice(m.off),e,sub.map(x=>x.h),l).replace(/data-i="(\d+)"/g,(s,n)=>`data-i="${sub[n].i}"`)}</div>`}).join('')}</div>`}
+ else body=`<div class="bub"><span class="who">${T('unk',l)}</span>${segs(raw,0,list,l)}</div>`;
+ const kinds=[...new Set(list.map(h=>h.kind))];
+ return `<section class="sec o1"><h2><span class="n">01</span>${T('xrT',l)}</h2>${body}${kinds.length?`<div class="lgd" aria-hidden="true">${kinds.map(k=>`<span><span class="mk ${k}">${T('mk_'+k,l)}</span></span>`).join('')}</div><p class="mu" style="margin:0;font-size:15px"><span class="hp">${T('xrHp',l)}</span><span class="hd2">${T('xrHd',l)}</span></p>`:''}</section>`}
+const LANES={p1_ipo_upi:{n:'p1',real:['sp1_a','sp1_b','sp1_c'],ask:(a,L,l)=>[`<span class="mo">${inr(a.amount)}</span>`,`${T('sp1_d',l)}<br><span class="mo">${esc(L.payee?L.payee.value:'')}</span>`]},
+ p4_withdrawal_fee:{n:'p4',real:['sp4_a','sp4_b'],ask:(a,L,l)=>[`${T('sp4_d',l)}<br><span class="mo">${inr(a.amount)}</span>`,`<span class="mo">${esc(L.payee?L.payee.value:'')}</span>`]}};
+function splitHtml(L,l){
+ const it=L.items.find(x=>LANES[x.id]);if(!it)return '';const c=LANES[it.id],ar=`<span class="ar">${ic('arr')}</span>`,a=L.action_requested;
+ const top=[T('you',l),...c.real.map(k=>T(k,l))],bot=[T('you',l),...c.ask(a,L,l)];
+ const row=(arr,cls,t)=>`<div class="ln ${cls}"><span class="lb">${t}</span>${arr.map((x,i)=>(i?ar:'')+`<span class="nd${/class="mo"/.test(x)&&/@|\./.test(x)&&String(x).length>40?' m2':''}">${x}</span>`).join('')}</div>`;
+ return `<section class="sec o2"><h2><span class="n">02</span>${T('splT',l)}</h2><div class="ps">${row(top,'ok',T('splReal_'+it.id,l))}<div class="brk">${ic('fork')}<span><b>${T('breakT',l)}</b><br>${esc(lastSent(L2(it,'why',l)))}</span></div>${row(bot,'no',T('splAsk',l))}</div></section>`}
+function ledgerHtml(L,l){return `<section class="sec o3"><h2><span class="n">03</span>${T('ledT',l)}</h2><p class="mu" style="margin:0;font-size:16px">${T('ledH',l)}</p>${L.items.length?L.items.map(i=>cardHtml(i,l)).join(''):`<p>${T('noItems',l)}</p>`}<button class="bt gh sm" data-act="legend">${ic('q')}${T('lgT',l)}</button></section>`}
+function roadHtml(L,l){
+ const cur=L.stage?L.stage.index:0,tl=L.timeline||[];
+ const stops=[1,2,3,4,5].map(n=>{const es=tl.filter(e=>e.stage===n);
+  return `<div class="stop ${n===cur?'cur':''} ${es.length?'has':''}" data-n="${n}"><b>${T('stop'+n,l)}</b>${n===cur?`<div class="bc"><u>${T('here',l)}</u>: ${esc(L2(L.stage,'because',l))}</div>`:''}${es.map(e=>(e.is_transition?`<div class="trip">${ic('flag')} ${T('trip',l)}</div>`:'')+`<div class="dock ${e.is_payment_ask?'pay':''}"><i>${esc(e.sender)}</i>${esc(e.snippet)}</div>`).join('')}</div>`}).join('');
+ return `<section class="sec o4"><h2><span class="n">04</span>${T('roadT',l)}</h2><p class="mu" style="margin:0;font-size:16px">${T('roadH',l)}</p>${L.stage?`<div class="road">${stops}</div>`:`<p>${T('noStage',l)}</p>`}</section>`}
+const NXA={already_paid_flow:'paid',call_1930:'tel',ask_trusted_person:'trust',verify_payee_sebi_check:'sebi',report_cybercrime:'cc'};
+function nextHtml(L,l){return `<section class="sec o5"><h2><span class="n">05</span>${T('nxT',l)}</h2><ol class="nx">${L.next_steps.map(s=>{const a=NXA[s],t=T('n_'+s,l);return `<li>${a?`<button class="lk" data-act="nx" data-v="${a}">${t}${ic('arr')}</button>`:`<span>${t}</span>`}</li>`}).join('')}</ol></section>`}
+function receiptHtml(L,l){const p=L.privacy,none=T('none',l),tk=k=>UI[l]['tok_'+k]||k;
+ const to=(l==='hi'&&p.to==='nobody (rules ran on this device)')?T('to_local','hi'):p.to;
+ return `<section class="sec o6"><h2><span class="n">06</span>${T('prT',l)}</h2><div class="rcw"><div class="rc"><h3>IKSHA · ईक्षा</h3><hr><dl><dt>${T('pr_on',l)}</dt><dd>${p.on_device.map(x=>'+ '+esc(tk(x))).join('<br>')||none}</dd><dt>${T('pr_sent',l)}</dt><dd>${p.sent.length?p.sent.map(esc).join('<br>'):'— '+none}</dd><dt>${T('pr_to',l)}</dt><dd>${esc(to)}</dd><dt>${T('pr_stored',l)}</dt><dd>${p.stored==='none'?'— '+none:esc(p.stored)}</dd></dl><hr><div style="text-align:center">* * *</div></div></div></section>`}
+/* ===== state ===== */
+const S={screen:'home',lang:'hi',theme:'light',vp:innerWidth>=900?'dk':'ph',caseId:'kavita',sit:'PREVENTION',raw:'',orig:'',ledger:null,who:'mummy',voice:false,off:false,err:false,empty:false,listen:false};
+const RM=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+function setCase(id){const c=CASES[id]();S.caseId=id;S.ledger=c.ledger;S.raw=c.raw;S.orig=c.raw;S.sit=c.ledger.situation;S.empty=false}
+function eff(){const L=Object.assign({},S.ledger,{situation:S.sit});if(S.raw!==S.orig)delete L.highlights;return L}
+const isWide=()=>($('#app')||{}).clientWidth>=900;
+let TM=[];
+function go(s){TM.forEach(clearTimeout);TM=[];stopVoice(true);S.screen=s;render(true)}
+/* ===== screens ===== */
+function headerHtml(){const l=S.lang;return `<header class="hd">${S.screen!=='home'?`<button class="bt gh sm" data-act="back" aria-label="${T('back',l)}">${ic('back')}</button>`:''}<button class="wm" data-act="home" aria-label="IKSHA ${T('home',l)}">${markSvg(36)}<span>ईक्षा</span><small>IKSHA</small></button><span class="sp"></span><button class="bt gh sm" data-act="lang" lang="${l==='hi'?'en':'hi'}">${T('lang',l)}</button></header>`}
+function renderHome(){const l=S.lang;
+ const ex=[['kavita','k1','ex1'],['praveen','k2','ex2'],['legit','k3','ex3'],['edu','k4','ex4']];
+ return `<div class="hero">${headerHtml()}<div class="hm"><div class="ey"><button class="eyebtn" data-act="start" data-v="paste" aria-label="${T('paste',l)}">${eyeSvg()}</button><div class="ruko">${T('ruko',l)} · pause</div></div><div class="hl2"><h1>${T('h1',l)}</h1><p>${T('sub',l)}</p>
+<div class="ins"><button class="ic" data-act="start" data-v="speak">${ic('mic')}<span>${T('speak',l)}<small>${T('speakS',l)}</small></span></button><button class="ic" data-act="start" data-v="paste">${ic('paste')}<span>${T('paste',l)}<small>${T('pasteS',l)}</small></span></button><button class="ic" aria-disabled="true" data-act="none">${ic('cam')}<span>${T('shot',l)}<small>${T('soon',l)}</small></span></button></div></div></div></div>
+<div class="pg"><section class="sec"><h2>${T('exT',l)}</h2><div class="ex">${ex.map(e=>`<button class="exc ${e[1]}" data-act="ex" data-v="${e[0]}"><b>${T(e[2],l)}</b><span>${T(e[2]+'s',l)}</span></button>`).join('')}</div></section></div>`}
+function renderInput(){const l=S.lang;
+ return `<div class="pg"><h1 style="font-size:30px">${T('inT',l)}</h1><p class="mu" style="margin-top:6px">${T('inH',l)}</p><label class="sr" for="ta">${T('inT',l)}</label><textarea class="ta" id="ta" placeholder="${T('ph',l)}" lang="hi">${esc(S.raw)}</textarea>
+${S.empty?`<div class="emp" role="alert">${ic('paste')}<h2>${T('emptyT',l)}</h2><p class="mu">${T('emptyB',l)}</p></div>`:''}
+<div class="chips"><button class="bt gh" data-act="speak">${S.listen?`<span class="wave"><b></b><b></b><b></b><b></b><b></b></span>${T('listening',l)}`:ic('mic')+T('speak',l)}</button><button class="bt gh" data-act="clr">${ic('cross')}${T('clear',l)}</button></div>
+<button class="bt" data-act="toSit" style="width:100%">${T('next',l)}${ic('arr')}</button></div>`}
+function renderSituation(){const l=S.lang;
+ return `<div class="pg"><h1 style="font-size:30px">${T('sitT',l)}</h1><p class="mu" style="margin-top:6px">${T('sitH',l)}</p><div class="sit">${['PREVENTION','ATTEMPTED','PAID','ONGOING'].map((s,i)=>`<button class="sc" data-act="sit" data-v="${s}" aria-pressed="${S.sit===s}"><span class="num">${i+1}</span><span>${T('s_'+s,l)}<small>${T('s_'+s+'s',l)}</small></span></button>`).join('')}</div></div>`}
+function renderChecking(){const l=S.lang;
+ return `<div class="pg"><h1 style="font-size:30px">${T('chkT',l)}</h1><ul class="ck" aria-live="polite">${[1,2,3].map(n=>`<li><span class="tk">${ic('check')}</span>${T('chk'+n,l)}</li>`).join('')}</ul><div class="sk"></div><div class="sk"></div><div class="sk" style="height:120px"></div></div>`}
+function renderError(){const l=S.lang;return `<p class="bn er" role="alert">${ic('alert')}${T('errT',l)}</p><div class="pg"><div class="emp">${ic('alert')}<h2>${T('errT',l)}</h2><p class="mu">${T('errB',l)}</p></div><button class="bt" data-act="retry" style="width:100%">${T('retry',l)}</button></div>`}
+function renderResult(L,raw,l){
+ return `<div class="pg res">${L.situation==='PAID'?`<button class="bt" data-act="nx" data-v="paid" style="width:100%">${ic('phone')}${T('pStop',l)}</button>`:''}${vdHtml(L,l)}
+<div class="lay"><div class="lp">${xrayHtml(L,raw,l)}${splitHtml(L,l)}${roadHtml(L,l)}</div><div class="rp">${ledgerHtml(L,l)}${nextHtml(L,l)}${receiptHtml(L,l)}</div></div></div>`}
+function stickyHtml(l){return `<nav class="sticky" aria-label="actions"><button class="bt hl" data-act="nx" data-v="sebi">${ic('srch')}<span>${T('b_sebi',l)}</span></button><button class="bt" data-act="nx" data-v="trust">${ic('users')}<span>${T('b_trust',l)}</span></button><button class="bt" data-act="nx" data-v="paid">${ic('phone')}<span>${T('b_paid',l)}</span></button></nav>`}
+function trustText(L,l,who){const a=L.action_requested,f=L.items.filter(i=>i.label==='CONTRADICTED'||i.label==='COULDNT_VERIFY').slice(0,3);
+ return [T('gr_'+who,l)+',',T('tr_s_'+L.situation,l),'',T('tr_ask',l)+' '+L2(a,'text',l)].concat(L.payee?[T('tr_pay',l)+' '+L.payee.value]:[]).concat(f.length?['',T('tr_find',l)].concat(f.map(i=>'- '+L2(i,'title',l))):[]).concat(['',T('tr_end',l)]).join('\n')}
+function renderTrust(L,l){
+ return `<div class="pg"><h1 style="font-size:30px">${T('trT',l)}</h1><p class="mu" style="margin-top:6px">${T('trSub',l)}</p><div class="cmpz"><div class="chips" role="group">${['mummy','beta','padosi','dost'].map(w=>`<button class="chip" data-act="who" data-v="${w}" aria-pressed="${S.who===w}">${ic('users')}${T('who_'+w,l)}</button>`).join('')}</div>
+<div class="bub" id="tt">${esc(trustText(L,l,S.who))}</div><div class="chips"><button class="bt gh" data-act="copy" data-v="tt">${ic('copy')}${T('copy',l)}</button><button class="bt hl" data-act="share">${ic('share')}${T('send',l)}</button></div></div></div>`}
+function incident(L,raw,l){const list=hls(L,raw),urls=[];list.filter(h=>h.kind==='url').forEach(h=>{const s=raw.slice(h.start,h.end),p=urls[urls.length-1];if(p&&p.end===h.start){p.s+=s;p.end=h.end}else urls.push({s,end:h.end})});
+ return {date:new Date().toISOString().slice(0,10),amount:L.action_requested.amount==null?'':String(L.action_requested.amount),payee:L.payee?L.payee.value:'',urls:urls.map(u=>u.s).join(', '),claim:L2(L.action_requested,'text',l),platform:L.timeline?'Telegram':'WhatsApp',reg:list.filter(h=>h.kind==='registration').map(h=>raw.slice(h.start,h.end)).join(', ')}}
+function renderPaid(L,raw,l){const inc=incident(L,raw,l);
+ const st=[['t_now','pa_now','pa_now_s'],['t_15','pa_15','pa_15_s'],['t_60','pa_60a','pa_60a_s','https://cybercrime.gov.in'],['t_60','pa_60b','pa_60b_s','https://scores.sebi.gov.in'],['t_60','pa_60c','pa_60c_s']];
+ const F=[['date','f_date','date'],['amount','f_amount','text'],['payee','f_payee','text'],['urls','f_urls','text'],['claim','f_claim','text'],['platform','f_platform','text'],['reg','f_reg','text']];
+ return `<div class="pg"><h1 style="font-size:30px">${T('paT',l)}</h1><p class="mu" style="margin-top:6px">${T('paSub',l)}</p>
+<div class="rail">${['t_now','t_15','t_60'].map((k,i)=>`<div class="rl"><b>${T(k,l)}</b><span>${T(['pa_now','pa_15','pa_60a'][i],l)}</span></div>`).join('')}</div>
+<a class="big" href="tel:1930">1930<small>${ic('phone')} ${T('call1930',l)}</small></a>
+<ol class="nx">${st.map(s=>`<li><div><small class="tm">${T(s[0],l)}</small><br>${s[3]?`<a class="lk2" href="${s[3]}" target="_blank" rel="noopener">${T(s[1],l)}</a>`:`<b>${T(s[1],l)}</b>`}<br><span class="mu" style="font-weight:400;font-size:16px">${T(s[2],l)}</span></div></li>`).join('')}</ol>
+<p class="bn off" style="border-radius:12px">${ic('alert')}${T('paNo',l)}</p>
+<section class="sec"><h2>${T('inc',l)}</h2><p class="mu" style="margin:0;font-size:16px">${T('incH',l)}</p><div class="cmpz" id="inc">${F.map(f=>`<div class="fl"><label for="i_${f[0]}">${T(f[1],l)}</label>${f[0]==='claim'?`<textarea id="i_${f[0]}" rows="3" data-k="${f[1]}">${esc(inc[f[0]])}</textarea>`:`<input id="i_${f[0]}" type="${f[2]}" data-k="${f[1]}" value="${esc(inc[f[0]])}"${f[0]==='payee'||f[0]==='urls'?' class="mo"':''}>`}</div>`).join('')}<button class="bt hl" data-act="copy" data-v="inc">${ic('copy')}${T('copy',l)}</button></div></section></div>`}
+/* ===== sheets ===== */
+function openSheet(h){closeSheet();const l=S.lang,d=document.createElement('div');d.className='sheetbg';d.id='shb';d.dataset.act='shbg';d.innerHTML=`<div class="sheet" role="dialog" aria-modal="true"><div class="gr"></div>${h}<button class="bt" data-act="shx" style="width:100%">${T('close',l)}</button></div>`;document.body.appendChild(d);$('[data-act=shx]',d).focus()}
+function closeSheet(){const d=$('#shb');if(d)d.remove()}
+function openMark(i){const L=eff(),l=S.lang,h=hls(L,S.raw)[i];if(!h)return;const it=h.item_id&&L.items.find(x=>x.id===h.item_id);
+ const c=it&&isWide()&&$('.cd[data-item="'+it.id+'"]');
+ if(c){c.scrollIntoView({block:'center',behavior:RM()?'auto':'smooth'});c.classList.remove('pulse');void c.offsetWidth;c.classList.add('pulse');c.focus({preventScroll:true});return}
+ openSheet(it?cardHtml(it,l):`<h2>${T('mk_'+h.kind,l)}</h2><p>${T('mkx_'+h.kind,l)==='mkx_'+h.kind?T('mkx_none',l):T('mkx_'+h.kind,l)}</p>`)}
+function openSebi(){const L=eff(),l=S.lang,p=L.payee;openSheet(`<h2>${T('sebiT',l)}</h2><p style="white-space:pre-line">${T('sebiB',l)}</p>${p?`<p class="bub" style="line-height:1.7"><span class="mo" id="sp">${esc(p.value)}</span></p><button class="bt gh" data-act="copy" data-v="sp">${ic('copy')}${T('copy',l)}</button>`:`<p class="mu">${T('sebiNone',l)}</p>`}<a class="bt hl" href="https://www.sebi.gov.in" target="_blank" rel="noopener">${T('sebiOpen',l)}${ic('arr')}</a>`)}
+function openLegend(){const l=S.lang;openSheet(`<h2>${T('lgT',l)}</h2>${['VERIFIED','CONTRADICTED','COULDNT_VERIFY','AI_INTERPRETATION'].map(k=>`<p style="margin:0"><span class="tag ${k}">${ic({VERIFIED:'check',CONTRADICTED:'cross',COULDNT_VERIFY:'q',AI_INTERPRETATION:'ai'}[k])}${k==='AI_INTERPRETATION'?'<span class="ai">AI</span>':''}${T('lab_'+k,l)}</span>${k==='AI_INTERPRETATION'?' '+T('aiNote',l):''}</p>`).join('')}<div class="cd hard"><div class="pl">${ic('lock')}${T('fg_hard',l)}</div><p>${T('lgHard',l)}</p></div><div class="cd easy"><div class="pl">${T('fg_easy',l)}</div><p>${T('lgEasy',l)}</p></div>`)}
+/* ===== voice ===== */
+function voiceText(){const L=eff(),l=S.lang;return T('band_'+L.header,l)+'. '+L2(L.action_requested,'text',l)+'. '+(L.next_steps[0]?T('n_'+L.next_steps[0],l):'')}
+function voiceBtn(){const b=$('[data-act=voice]');if(b)b.innerHTML=S.voice?`<span class="wave"><b></b><b></b><b></b><b></b><b></b></span>${T('ruk',S.lang)}`:ic('spk')+T('suna',S.lang)}
+function stopVoice(q){S.voice=false;clearTimeout(S.vt);try{speechSynthesis.cancel()}catch(e){}if(!q)voiceBtn()}
+function toggleVoice(){if(S.voice)return stopVoice();S.voice=true;voiceBtn();S.vt=setTimeout(()=>stopVoice(),7000);try{const u=new SpeechSynthesisUtterance(voiceText());u.lang=S.lang==='hi'?'hi-IN':'en-IN';u.onend=()=>stopVoice();speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+/* ===== connectors (desktop) ===== */
+const NS='http://www.w3.org/2000/svg';
+function wires(){const lay=$('.lay');if(!lay)return;const o=$('.wires',lay);if(o)o.remove();if(!isWide())return;const cr=lay.getBoundingClientRect(),svg=document.createElementNS(NS,'svg');svg.setAttribute('class','wires');svg.setAttribute('aria-hidden','true');let h='';
+ $$('.mk[data-item]',lay).forEach((m,k)=>{const id=m.dataset.item,c=id&&$('.cd[data-item="'+id+'"]',lay);if(!c)return;m.dataset.k=k;c.dataset.k=(c.dataset.k||'')+' '+k;const rs=m.getClientRects(),a=rs[rs.length-1],b=c.getBoundingClientRect();if(!a)return;const x1=a.right-cr.left,y1=a.top+a.height/2-cr.top,x2=b.left-cr.left,y2=Math.min(b.top+30,b.bottom-8)-cr.top,dx=Math.max(40,(x2-x1)/2);
+  h+=`<path data-k="${k}" d="M${x1} ${y1}C${x1+dx} ${y1} ${x2-dx} ${y2} ${x2} ${y2}"/><circle cx="${x1}" cy="${y1}" r="4"/><circle cx="${x2}" cy="${y2}" r="4"/>`});
+ svg.innerHTML=h;lay.appendChild(svg)}
+let wq=0;const wireSoon=()=>{cancelAnimationFrame(wq);wq=requestAnimationFrame(wires)};
+function hot(m,on){const k=m.dataset.k;if(k==null)return;m.classList.toggle('hot',on);const p=$('.wires path[data-k="'+k+'"]');if(p)p.classList.toggle('hot',on);const c=$('.cd[data-item="'+m.dataset.item+'"]');if(c)c.classList.toggle('hot',on)}
+/* ===== render ===== */
+function applyTheme(){const r=S.theme==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):S.theme;document.documentElement.setAttribute('data-theme',r)}
+function render(top){const l=S.lang,A=$('#app');document.documentElement.lang=l;applyTheme();document.body.className=S.vp;let h,off=(S.off||!navigator.onLine)?`<p class="bn off" role="status">${ic('alert')}${T('offB',l)}</p>`:'';
+ const L=eff();
+ switch(S.screen){case 'home':h=renderHome();break;case 'input':h=headerHtml()+off+renderInput();break;case 'situation':h=headerHtml()+off+renderSituation();break;case 'checking':h=headerHtml()+off+renderChecking();break;case 'error':h=headerHtml()+renderError();break;
+  case 'result':h=headerHtml()+off+renderResult(L,S.raw,l)+stickyHtml(l);break;case 'trust':h=headerHtml()+off+renderTrust(L,l);break;case 'paid':h=headerHtml()+off+renderPaid(L,S.raw,l);break}
+ if(S.screen==='home')h=off+h;A.innerHTML=h;renderToolbar();
+ if(top)scrollTo(0,0);
+ if(S.screen==='result'){const od=e=>+(/\bo(\d)\b/.exec(e.className)||[0,9])[1];$$('.res .sec').sort((x,y)=>od(x)-od(y)).forEach((e,i)=>{const n=$('.n',e);if(n)n.textContent=String(i+1).padStart(2,'0')});wireSoon();const w=$('.rcw');if(w){if(RM()||!window.IntersectionObserver)w.classList.add('in');else{const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){w.classList.add('in');io.disconnect()}},{threshold:.35});io.observe(w)}}if(top&&!RM()&&navigator.vibrate)try{navigator.vibrate([30,40,60])}catch(e){}}}
+function runCheck(){go('checking');[400,900,1400].forEach((t,i)=>TM.push(setTimeout(()=>{const e=$$('.ck li')[i];if(e)e.classList.add('on')},t)));TM.push(setTimeout(()=>{S.screen='';go(S.err?'error':'result')},1900))}
+function speechIn(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;S.listen=true;render();const done=()=>{if(S.listen){S.listen=false;if(S.screen==='input')render()}};
+ if(SR){try{const r=new SR();r.lang='hi-IN';r.onresult=e=>{S.raw=e.results[0][0].transcript;S.empty=false};r.onerror=r.onend=done;r.start();return}catch(e){}}
+ setTimeout(()=>{S.raw=S.orig||CASES.kavita().raw;S.empty=false;done()},2200)}
+/* ===== prototype toolbar ===== */
+function renderToolbar(){let t=$('#pt');if(!t){t=document.createElement('div');t.id='pt';t.className='pt';document.body.appendChild(t)}const o=t.classList.contains('o');
+ const row=(n,k,opts)=>`<div class="rw"><span>${n}</span><div class="sg">${opts.map(x=>`<button data-pt="${k}:${x[0]}" aria-pressed="${x[2]}">${x[1]}</button>`).join('')}</div></div>`;
+ const st=S.err?'err':S.off?'off':S.empty?'empty':'ok';
+ t.className='pt'+(o?' o':'');t.innerHTML=`<button data-pt="tog" aria-expanded="${o}">${ic('gear')}<span class="sr">Prototype</span></button><div class="pn">`+
+ row('Case','case',[['kavita','Kavita',S.caseId==='kavita'],['praveen','Praveen chat',S.caseId==='praveen'],['legit','Routine notice',S.caseId==='legit'],['cant',"Can't verify",S.caseId==='cant']])+
+ row('Language','lang',[['hi','हिं',S.lang==='hi'],['en','EN',S.lang==='en']])+
+ row('Theme','theme',[['auto','Auto',S.theme==='auto'],['light','Light',S.theme==='light'],['dark','Dark',S.theme==='dark']])+
+ row('Viewport','vp',[['ph','Phone 390',S.vp==='ph'],['dk','Desktop 1280',S.vp==='dk']])+
+ row('State','st',[['ok','Normal',st==='ok'],['empty','Empty',st==='empty'],['err','Error',st==='err'],['off','Offline',st==='off']])+`</div>`}
+function ptAct(v){const [k,x]=v.split(':');
+ if(k==='tog'){$('#pt').classList.toggle('o');return renderToolbar()}
+ if(k==='case'){const was=S.screen;setCase(x);S.err=S.off=false;if(was==='home'||was==='input'||was==='situation')render();else go(was==='checking'?'result':was);return}
+ if(k==='lang'){S.lang=x}else if(k==='theme'){S.theme=x}else if(k==='vp'){S.vp=x}
+ else if(k==='st'){S.err=S.off=false;if(x==='ok'){if(S.empty)setCase(S.caseId)}else if(x==='empty'){S.raw='';S.empty=true;return go('input')}else if(x==='err'){S.err=true;return runCheck()}else S.off=true}
+ render();setTimeout(wireSoon,50)}
+/* ===== events ===== */
+document.addEventListener('click',e=>{const el=e.target.closest('[data-pt],[data-act]');if(!el)return;
+ if(el.dataset.pt)return ptAct(el.dataset.pt);const a=el.dataset.act,v=el.dataset.v,l=S.lang;
+ if(a==='shbg'){if(e.target===el)closeSheet();return}
+ if(a==='shx')return closeSheet();
+ if(a==='none')return;
+ if(a!=='copy')closeSheet();
+ if(a==='lang'){S.lang=l==='hi'?'en':'hi';return render()}
+ if(a==='home')return go('home');
+ if(a==='back'){return go({input:'home',situation:'input',result:'situation',error:'situation',trust:'result',paid:'result',checking:'situation'}[S.screen]||'home')}
+ if(a==='start'){const ey=$('.eye');if(ey)ey.classList.add('open');setTimeout(()=>{go('input');if(v==='speak')speechIn()},RM()?0:520);return}
+ if(a==='ex'){setCase(v);return go('input')}
+ if(a==='clr'){S.raw='';S.empty=false;return render()}
+ if(a==='speak')return speechIn();
+ if(a==='toSit'){const t=$('#ta');if(t)S.raw=t.value;if(!S.raw.trim()){S.empty=true;return render()}return go('situation')}
+ if(a==='sit'){S.sit=v;S.err=S.err&&true;return runCheck()}
+ if(a==='retry'){S.err=false;return runCheck()}
+ if(a==='mk')return openMark(+el.dataset.i);
+ if(a==='legend')return openLegend();
+ if(a==='voice')return toggleVoice();
+ if(a==='who'){S.who=v;return render()}
+ if(a==='nx'){if(v==='paid')return go('paid');if(v==='trust')return go('trust');if(v==='sebi')return openSebi();if(v==='tel'){location.href='tel:1930';return}if(v==='cc'){open('https://cybercrime.gov.in','_blank','noopener');return}}
+ if(a==='copy'){let t;if(v==='inc')t=$$('#inc [data-k]').map(i=>T(i.dataset.k,l)+': '+i.value).join('\n');else{const n=$('#'+v);t=n?n.textContent:''}
+  const ok=()=>{el.lastChild.textContent=T('copied',l)};try{navigator.clipboard.writeText(t).then(ok,ok)}catch(x){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(y){}ta.remove();ok()}return}
+ if(a==='share'){const t=$('#tt').textContent;if(navigator.share)navigator.share({text:t}).catch(()=>{});else open('https://wa.me/?text='+encodeURIComponent(t),'_blank','noopener');return}});
+document.addEventListener('input',e=>{if(e.target.id==='ta'){S.raw=e.target.value;if(S.empty){S.empty=false;const m=$('.emp');if(m)m.remove()}}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+document.addEventListener('mouseover',e=>{const m=e.target.closest('.mk[data-item]');if(m)hot(m,true)});
+document.addEventListener('mouseout',e=>{const m=e.target.closest('.mk[data-item]');if(m)hot(m,false)});
+document.addEventListener('focusin',e=>{const m=e.target.closest&&e.target.closest('.mk[data-item]');if(m)hot(m,true)});
+document.addEventListener('focusout',e=>{const m=e.target.closest&&e.target.closest('.mk[data-item]');if(m)hot(m,false)});
+addEventListener('resize',wireSoon);addEventListener('online',()=>render());addEventListener('offline',()=>render());
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(S.theme==='auto')applyTheme()});
+/* ===== init ===== */
+(function(){const f=document.createElement('link');f.rel='icon';f.href='data:image/svg+xml,'+encodeURIComponent(markSvg(64));document.head.appendChild(f);
+ const ap=document.createElement('link');ap.rel='apple-touch-icon';ap.href=f.href;document.head.appendChild(ap);
+ setCase('kavita');render();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(wireSoon)})();
+</script>
+<script src="config.js"></script>
+<script src="engine.bundle.js"></script>
+<script src="sach-wire.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js').catch(function () {});
+    });
+  }
+</script>
+<!--
+PORT NOTES
+
+1. DESIGN TOKENS (CSS custom properties on :root, dark overrides on [data-theme=dark])
+   Light: neel #12204A (css:neel) | haldi #F4B400 (css:hal) | kumkum #C21E14 (css:kum) | patta #0B5C50 (css:pat, VERIFIED only)
+   paper #F4F6FA (css:bg) | surface #FFFFFF (css:sf) | ink #0E1830 (css:ink) | muted #4A5573 (css:mu) | slate #2F4558 on #E8EFF5 (css:sl on css:sb)
+   tints: kumkum text #A3170F on #FDECEA | haldi text #6B4400 on #FFF3CC | patta #0B5C50 on #E3F4F0 | AI #4B3B7A on #F0EDF8
+   Dark: bg #0A1022 | surface #111A33 | ink #E8ECF8 | muted #A6B1D6 | haldi #FFC933 | kumkum text #FF9A92 on #3A1512
+         slate #C3D3E2 on #1C2D3C | patta #8EE0D0 on #0E2D28 | AI #CFC3F5 on #271F45
+   Fonts: display Rozha One (fallback Yatra One), body Mukta, figures IBM Plex Mono.
+   Type: body 18px / 1.65. Touch targets 48px minimum. Icons 24px grid, 1.75px stroke.
+   Theme is resolved to data-theme=light|dark by JS (Auto follows prefers-color-scheme).
+   Layout switches on CONTAINER width (@container 900px on #app), so the same render functions serve phone and desktop.
+   Verdict colours: HIGH kumkum, MIXED haldi, LOW and CANT_VERIFY slate. Green (patta) is used only on the VERIFIED tag.
+
+2. NEW UI STRING KEYS (UI.hi and UI.en carry the same keys)
+   ruko, h1, sub, speak, speakS, paste, pasteS, shot, soon, exT, ex1, ex1s, ex2, ex2s, ex3, ex3s, ex4, ex4s, inT
+   inH, ph, next, clear, listening, back, sitT, sitH, s_PREVENTION, s_PREVENTIONs, s_ATTEMPTED, s_ATTEMPTEDs
+   s_PAID, s_PAIDs, s_ONGOING, s_ONGOINGs, chkT, chk1, chk2, chk3, band_HIGH_CONCERN, band_MIXED_SIGNALS
+   band_LOW_CONCERN, band_CANT_VERIFY, bl_LOW_CONCERN, bl_MIXED_SIGNALS, bl_HIGH_CONCERN, bl_CANT_VERIFY, kick
+   ask, nt_HIGH_CONCERN, nt_MIXED_SIGNALS, nt_LOW_CONCERN, nt_CANT_VERIFY, suna, ruk, xrT, xrHp, xrHd, mk_payee
+   mk_amount, mk_deadline, mk_secrecy, mk_claim, mk_url, mk_registration, mkx_deadline, mkx_secrecy, mkx_none
+   splT, splReal_p1_ipo_upi, splReal_p4_withdrawal_fee, splAsk, you, sp1_a, sp1_b, sp1_c, sp1_d, sp4_a, sp4_b
+   sp4_d, breakT, ledT, ledH, lab_VERIFIED, lab_CONTRADICTED, lab_COULDNT_VERIFY, lab_AI_INTERPRETATION, aiNote
+   fg_hard, fg_easy, settle, srcL, srcPend, aiRe, lgT, lgHard, lgEasy, roadT, roadH, stop1, stop2, stop3, stop4
+   stop5, here, trip, noStage, nxT, n_stop_payment, n_verify_payee_sebi_check, n_ask_trusted_person
+   n_dont_engage, n_report_i4c_and_telecom, n_keep_screenshots, n_already_paid_flow, n_call_1930
+   n_report_cybercrime, n_tell_bank, n_report_scores, n_stop_paying, n_dont_pay_withdrawal_fee, prT, pr_on
+   pr_sent, pr_to, pr_stored, none, tok_redaction, tok_extraction, tok_rules, to_local, trT, trSub, who_mummy
+   who_beta, who_padosi, who_dost, gr_mummy, gr_beta, gr_padosi, gr_dost, tr_s_PREVENTION, tr_s_ATTEMPTED
+   tr_s_PAID, tr_s_ONGOING, tr_ask, tr_pay, tr_find, tr_end, copy, copied, send, paT, paSub, paNo, t_now, t_15
+   t_60, pa_now, pa_now_s, pa_15, pa_15_s, pa_60a, pa_60a_s, pa_60b, pa_60b_s, pa_60c, pa_60c_s, call1930, inc
+   incH, f_date, f_amount, f_payee, f_urls, f_claim, f_platform, f_reg, b_sebi, b_trust, b_paid, sebiT, sebiB
+   sebiNone, sebiOpen, emptyT, emptyB, errT, errB, retry, offB, mode_rules_only, mode_llm, close, home, lang
+   pStop, unk, noItems
+   Hindi lines to be read by a native reviewer are marked /* REVIEW */ in the UI object (gr_padosi, tr_s_PAID).
+   Dynamic key families: band_<Header>, bl_<Header>, nt_<Header>, s_<Situation>, s_<Situation>s, lab_<Label>,
+   mk_<kind>, mkx_<kind>, splReal_<item.id>, n_<NextStep> (all 13 values), tok_<privacy token>, mode_<mode>, stop1..stop5, who_*, gr_*.
+
+3. HIGHLIGHTS FIELD (proposed, optional)
+   highlights?: { start: number; end: number; kind: 'payee'|'amount'|'deadline'|'secrecy'|'claim'|'url'|'registration'; item_id?: string }[]
+   Offsets are UTF-16 indexes into the redacted text the engine received (CheckRequest.redacted_text). At most 12 entries,
+   sorted, non-overlapping. The mockup sanitises it (drops out-of-range, overlapping or surplus entries) and every screen works
+   without it. It is added to the Kavita and Praveen sample ledgers (8 entries each). Offsets were computed and asserted by script.
+   item_id links a mark to a LedgerItem.id; marks with no item_id (deadline, secrecy) open a short static explanation instead.
+   If the user edits the pasted text, the mockup drops highlights because the offsets no longer apply.
+
+4. THINGS THE MOCKUP DOES THAT THE CURRENT LEDGER CONTRACT CANNOT SUPPLY
+   a. The raw (redacted) message text is not in Ledger. renderResult(ledger, rawText, lang) takes it separately; the app must keep
+      CheckRequest.redacted_text in state. The sample messages and the Praveen chat export are authored for this mockup
+      (fixtures hold only snippets). The firm name, registration number INZ000123456 and the .in domain are made up.
+   b. Process-split lane text is static UI keyed by item.id and exists only for p1_ipo_upi and p4_withdrawal_fee. Other cards get
+      no split. Break sentence = last sentence of the item's why_* text. New process cards need new lane strings.
+   c. Names of road stops other than the current one are static (stop1..stop5). Stage only carries the current stage's names.
+   d. privacy.to is free English text. The Hindi view maps the one known string ("nobody (rules ran on this device)") and shows
+      anything else as is. privacy.on_device tokens are mapped through tok_*; unknown tokens show raw.
+   e. Every sample source has verified:false and a generic sebi.gov.in URL. The mockup shows "source check still open" for these.
+   f. The incident summary (already-paid screen) needs fields Ledger lacks. Platform is guessed (chat export = Telegram, else WhatsApp),
+      links and registration numbers are read from highlights, date is today. A real build should pass Incident from the engine.
+   g. SEBI Check has no deep link in the contract. The sheet shows the payee ID to copy and opens sebi.gov.in.
+   h. The ledger has no sender for a single pasted message. The bubble label ("Unknown number") is static.
+   i. The situation chosen on the Situation screen replaces ledger.situation in the mockup. In the product the engine returns it.
+   j. Data inconsistency to check in the engine: Praveen's action_requested.amount is 9876 but the timeline snippet says Rs 5,000 tax.
+      The sample chat adds "Total Rs 9,876 with charges" so both numbers appear. Routine notice and Education post both use the
+      legit_a fixture. Cant-verify is simulated from the Kavita ledger (items cleared, header CANT_VERIFY).
+   k. No ledger item has label AI_INTERPRETATION or VERIFIED in the fixtures. Those label shapes are shown in the legend sheet only.
+   l. One fixture string (p6_url_flags why_hi) contains a Hindi word for security. It is ledger-owned copy kept verbatim.
+   m. Voice uses browser SpeechSynthesis / SpeechRecognition. Hindi voices vary on cheap Android phones; the waveform falls back to a timer.
+   n. Fonts: Rozha One and Yatra One both list Devanagari and Latin in google/fonts METADATA. Rozha One was chosen without a visual
+      side-by-side. The rupee sign in IBM Plex Mono was not confirmed; the stack falls back to Mukta for it. Self-host all three in the port.
+   o. Prototype toolbar, State switcher and viewport frame are not product UI.
+
+5. BEHAVIOUR NOTES
+   Colour is never the only signal: label tags differ by border (solid check, heavy cross, dashed question, dotted AI), marks differ
+   by shape (pill, box, wavy, double underline, marker with dotted base, dashed pill, dotted box), evidence is a lock plate or a peeling sticker.
+   All animation is transform and opacity only and is removed under prefers-reduced-motion. No score, no percentage, no counts of people.
+-->
+</body></html>
