@@ -1,4 +1,4 @@
-# SACH — Situation Check
+# IKSHA — Situation Check
 
 One Next.js project. `engine/` + `app/api/*` + `contracts/` are Person A's. `public/` (the static app) is Person B's.
 
